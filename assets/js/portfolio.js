@@ -47,7 +47,8 @@
         var item = thumb.closest('.work-item');
         var image = thumb.querySelector('img');
         if (!item || !image) return;
-        openLightbox(item.getAttribute('data-img') || image.currentSrc || image.src, item.getAttribute('data-title') || image.alt || 'نمایش نمونه‌کار');
+        var fullSrc = image.dataset.fullSrc || item.getAttribute('data-full-src') || image.currentSrc || image.src;
+        openLightbox(fullSrc, item.getAttribute('data-title') || image.alt || 'نمایش نمونه‌کار');
       });
     });
 
@@ -175,13 +176,29 @@
     function openLightbox(src, alt) {
       if (!src) return;
       previousFocus = document.activeElement;
-      lightboxImg.src = src;
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('has-lightbox');
+      document.body.classList.remove('work-lightbox-open');
+      resetZoom();
+      lightboxImg.removeAttribute('src');
       lightboxImg.alt = alt;
+      lightboxImg.onload = revealLoadedImage;
+      lightboxImg.onerror = revealLoadedImage;
+      lightboxImg.src = src;
+      if (lightboxImg.complete && lightboxImg.naturalWidth > 0) {
+        revealLoadedImage();
+      }
+    }
+
+
+    function revealLoadedImage() {
+      lightboxImg.onload = null;
+      lightboxImg.onerror = null;
       resetZoom();
       lightbox.classList.add('is-open');
       lightbox.setAttribute('aria-hidden', 'false');
       document.body.classList.add('has-lightbox');
-      document.body.classList.remove('work-lightbox-open');
       if (closeBtn) closeBtn.focus({ preventScroll: true });
     }
 
@@ -192,6 +209,8 @@
       document.body.classList.remove('work-lightbox-open');
       stopDragging();
       resetZoom();
+      lightboxImg.onload = null;
+      lightboxImg.onerror = null;
       lightboxImg.removeAttribute('src');
       lightboxImg.alt = 'نمایش نمونه‌کار';
       if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus({ preventScroll: true });
@@ -252,13 +271,5 @@
 
   function clamp(value, min, max) {
     return Math.min(max, Math.max(min, value));
-  }
-
-  function getScrollAmount(track) {
-    var firstItem = track.querySelector('.work-item');
-    if (!firstItem) return Math.max(280, Math.round(track.clientWidth * 0.85));
-    var styles = window.getComputedStyle(track);
-    var gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
-    return Math.round(firstItem.getBoundingClientRect().width + gap);
   }
 })();

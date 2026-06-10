@@ -123,15 +123,19 @@ $email = setting($settings, 'email', '');
               $workSub = (string)($work['subtitle'] ?? '');
               $workDesc = (string)($work['description'] ?? 'طراحی تمیز، مدرن و ریسپانسیو.');
               $workImage = trim((string)($work['image'] ?? ''));
+              $workFullImage = trim((string)($work['full_image'] ?? $workImage));
               $workLabel = (string)($work['label'] ?? 'نمونه دانشجویی');
               if ($workImage === '') {
                   continue;
               }
+              if ($workFullImage === '') {
+                  $workFullImage = $workImage;
+              }
           ?>
-          <article class="work-item" data-img="<?= e($workImage) ?>" data-title="<?= e($workTitle) ?>" data-sub="<?= e($workSub) ?>">
+          <article class="work-item" data-img="<?= e($workImage) ?>" data-full-src="<?= e($workFullImage) ?>" data-title="<?= e($workTitle) ?>" data-sub="<?= e($workSub) ?>">
             <button class="work-thumb" type="button" aria-label="نمایش بزرگ <?= e($workTitle) ?>">
               <span class="work-label"><?= e($workLabel !== '' ? $workLabel : 'نمونه دانشجویی') ?></span>
-              <img src="<?= e($workImage) ?>" alt="<?= e($workTitle) ?>" loading="lazy">
+              <img src="<?= e($workImage) ?>" data-full-src="<?= e($workFullImage) ?>" alt="<?= e($workTitle) ?>" loading="lazy">
             </button>
             <div class="work-info">
               <h3 class="work-title"><?= e($workTitle) ?></h3>

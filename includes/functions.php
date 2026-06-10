@@ -177,7 +177,17 @@ function render_admin_crud(array $config): void
             }
             if ($upload) {
                 $current = (string)($existing[$upload['field']] ?? '');
-                $item[$upload['field']] = handle_image_upload($upload['input'], $upload['dir'], $current);
+                $uploadedPath = handle_image_upload($upload['input'], $upload['dir'], $current);
+                $item[$upload['field']] = $uploadedPath;
+                if (!empty($upload['full_field'])) {
+                    $hasNewUpload = !empty($_FILES[$upload['input']])
+                        && (($_FILES[$upload['input']]['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE)
+                        && $uploadedPath !== $current;
+                    $fullField = (string)$upload['full_field'];
+                    $item[$fullField] = $hasNewUpload
+                        ? $uploadedPath
+                        : (string)($existing[$fullField] ?? $uploadedPath);
+                }
             }
             if (empty($item['created_at'])) { $item['created_at'] = now_string(); }
             $found = false;

@@ -32,7 +32,7 @@
 .work-lightbox.is-open{display:flex}
 .work-lightbox-backdrop{position:absolute;inset:0;z-index:0;background:transparent}
 .work-lightbox-stage{position:relative;z-index:1;width:100vw;height:100dvh;overflow:hidden;display:flex;align-items:center;justify-content:center;touch-action:none}
-.work-lightbox-img{display:block;max-width:92vw;max-height:88dvh;width:auto;height:auto;object-fit:contain;user-select:none;-webkit-user-select:none;cursor:grab;transform-origin:center center;will-change:transform;border-radius:16px;background:#fff;box-shadow:0 30px 90px rgba(0,0,0,.42)}
+.work-lightbox-img{display:block;max-width:92vw;max-height:88dvh;width:auto;height:auto;object-fit:contain;image-rendering:auto;user-select:none;-webkit-user-select:none;cursor:grab;transform-origin:center center;will-change:transform;border-radius:16px;background:#fff;box-shadow:0 30px 90px rgba(0,0,0,.42)}
 .work-lightbox-img.is-dragging{cursor:grabbing}
 .work-lightbox-close{position:fixed;top:18px;left:18px;z-index:2;width:46px;height:46px;border:1px solid rgba(255,255,255,.24);border-radius:16px;background:rgba(255,255,255,.14);color:#fff;font-size:32px;line-height:1;font-weight:500;display:grid;place-items:center;cursor:pointer}
 .work-lightbox-close:hover{background:rgba(255,255,255,.22)}
