@@ -103,51 +103,45 @@ $email = setting($settings, 'email', '');
         <h2 class="section-title display-6 mb-3">نمونه‌کارهای ساخته‌شده در مسیر دوره</h2>
         <p class="section-lead">چند نمونه از خروجی‌هایی که هنرجوها می‌توانند بعد از یادگیری طراحی سایت با هوش مصنوعی بسازند.</p>
       </div>
-      <div class="showcase-toolbar reveal">
-        <div class="d-flex flex-wrap gap-2">
-          <span class="badge-soft">نمونه دانشجویی</span>
-          <span class="badge-soft">طراحی ریسپانسیو</span>
-          <span class="badge-soft">قابل ارائه به کارفرما</span>
+
+      <div class="works-gallery reveal" aria-label="گالری نمونه‌کارها">
+        <div class="works-gallery-head">
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge-soft">نمونه دانشجویی</span>
+            <span class="badge-soft">طراحی ریسپانسیو</span>
+            <span class="badge-soft">قابل ارائه به کارفرما</span>
+          </div>
+          <div class="works-scroll-controls" aria-label="کنترل اسکرول نمونه‌کارها">
+            <button class="works-scroll-btn works-prev" type="button" aria-label="نمونه‌کار قبلی">قبلی</button>
+            <button class="works-scroll-btn works-next" type="button" aria-label="نمونه‌کار بعدی">بعدی</button>
+          </div>
         </div>
-        <div class="swiper-controls" aria-label="کنترل نمونه‌کارها">
-          <button class="swiper-button-prev works-prev" type="button"></button>
-          <button class="swiper-button-next works-next" type="button"></button>
-        </div>
-      </div>
-      <div class="swiper works-swiper reveal">
-        <div class="swiper-wrapper">
+
+        <div class="works-track" tabindex="0" aria-label="نمونه‌کارها؛ برای مشاهده موارد بیشتر به چپ و راست اسکرول کنید">
           <?php foreach ($works as $work):
               $workTitle = (string)($work['title'] ?? 'نمونه‌کار دوره');
-              $workSub = (string)($work['subtitle'] ?? 'خروجی قابل ارائه ساخته‌شده در مسیر دوره');
-              $workDesc = (string)($work['description'] ?? 'طراحی تمیز، مدرن و ریسپانسیو با جزئیات قابل بررسی.');
-              $workImage = (string)($work['image'] ?? 'assets/logo.png');
+              $workSub = (string)($work['subtitle'] ?? '');
+              $workDesc = (string)($work['description'] ?? 'طراحی تمیز، مدرن و ریسپانسیو.');
+              $workImage = trim((string)($work['image'] ?? ''));
               $workLabel = (string)($work['label'] ?? 'نمونه دانشجویی');
+              if ($workImage === '') {
+                  continue;
+              }
           ?>
-          <div class="swiper-slide">
-            <article class="work-card" role="button" tabindex="0" data-img="<?= e($workImage) ?>" data-title="<?= e($workTitle) ?>" data-sub="<?= e($workSub) ?>">
-              <div class="work-img-wrap">
-                <span class="work-label"><?= e($workLabel !== '' ? $workLabel : 'نمونه دانشجویی') ?></span>
-                <img src="<?= e($workImage) ?>" alt="<?= e($workTitle) ?>" loading="lazy">
-                <div class="work-overlay"><span class="work-open-btn">🔍 مشاهده بزرگ</span></div>
-              </div>
-              <div class="work-info">
-                <h3><?= e($workTitle) ?></h3>
-                <p class="text-muted-custom mb-2"><?= e($workDesc) ?></p>
-                <div class="work-card-footer">
-                  <div class="work-tags">
-                    <span class="tag">UI مدرن</span>
-                    <span class="tag">Responsive</span>
-                    <span class="tag">Portfolio</span>
-                  </div>
-                  <span class="work-view-link" aria-hidden="true">مشاهده بزرگ</span>
-                </div>
-              </div>
-            </article>
-          </div>
+          <article class="work-item" data-img="<?= e($workImage) ?>" data-title="<?= e($workTitle) ?>" data-sub="<?= e($workSub) ?>">
+            <button class="work-thumb" type="button" aria-label="نمایش بزرگ <?= e($workTitle) ?>">
+              <span class="work-label"><?= e($workLabel !== '' ? $workLabel : 'نمونه دانشجویی') ?></span>
+              <img src="<?= e($workImage) ?>" alt="<?= e($workTitle) ?>" loading="lazy">
+            </button>
+            <div class="work-info">
+              <h3><?= e($workTitle) ?></h3>
+              <p><?= e($workDesc) ?></p>
+            </div>
+          </article>
           <?php endforeach; ?>
         </div>
-        <div class="swiper-pagination"></div>
       </div>
+
       <div class="showcase-note text-center reveal">این نمونه‌ها نشان می‌دهند بعد از دوره می‌توانید خروجی واقعی و قابل ارائه بسازید.</div>
     </div>
   </section>
@@ -353,23 +347,10 @@ $email = setting($settings, 'email', '');
   </div>
 </footer>
 
-<div class="modal fade work-modal" id="workModal" tabindex="-1" aria-labelledby="workModalTitle" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen-lg-down modal-xl modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header gap-3">
-        <div class="me-auto">
-          <h5 class="modal-title fw-black" id="workModalTitle">نمایش نمونه‌کار</h5>
-          <div class="small text-white-50" id="workModalSub"></div>
-        </div>
-        <div class="d-flex gap-2 align-items-center">
-          <a class="work-zoom-btn d-inline-grid place-items-center text-center" id="workDownload" href="#" download title="دانلود تصویر">⇩</a>
-        </div>
-        <button type="button" class="btn-close btn-close-white ms-0" data-bs-dismiss="modal" aria-label="بستن"></button>
-      </div>
-      <div class="modal-body p-3 p-lg-4">
-        <div class="work-modal-frame" id="workModalFrame"><img id="workModalImg" class="work-modal-img" src="" alt="نمایش نمونه کار"></div>
-      </div>
-    </div>
+<div class="work-lightbox" id="workLightbox" aria-hidden="true" role="dialog" aria-label="نمایش بزرگ نمونه‌کار">
+  <button class="work-lightbox-close" type="button" aria-label="بستن">×</button>
+  <div class="work-lightbox-inner" id="workLightboxInner">
+    <img id="workLightboxImg" class="work-lightbox-img" src="" alt="نمایش نمونه‌کار">
   </div>
 </div>
 
