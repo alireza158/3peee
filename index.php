@@ -30,6 +30,7 @@ $email = setting($settings, 'email', '');
   <link href="assets/css/bootstrap.rtl.min.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
   <link rel="stylesheet" href="assets/css/landing.css">
+  <link rel="stylesheet" href="assets/css/portfolio.css">
 </head>
 <body>
 <header class="site-header">
@@ -99,8 +100,8 @@ $email = setting($settings, 'email', '');
     <div class="container">
       <div class="section-head reveal">
         <span class="section-kicker">🖼️ Showcase حرفه‌ای</span>
-        <h2 class="section-title display-6 mb-3">نمونه‌کارهایی که نشان می‌دهند خروجی دوره فقط تئوری نیست</h2>
-        <p class="section-lead">چند خروجی واقعی و قابل ارائه از جنس لندینگ، فروشگاه و صفحات محصول؛ با تصویر واضح، جزئیات قابل بررسی و ساختار مناسب رزومه.</p>
+        <h2 class="section-title display-6 mb-3">نمونه‌کارهای ساخته‌شده در مسیر دوره</h2>
+        <p class="section-lead">چند نمونه از خروجی‌هایی که هنرجوها می‌توانند بعد از یادگیری طراحی سایت با هوش مصنوعی بسازند.</p>
       </div>
       <div class="showcase-toolbar reveal">
         <div class="d-flex flex-wrap gap-2">
@@ -132,10 +133,13 @@ $email = setting($settings, 'email', '');
               <div class="work-info">
                 <h3><?= e($workTitle) ?></h3>
                 <p class="text-muted-custom mb-2"><?= e($workDesc) ?></p>
-                <div class="work-tags">
-                  <span class="tag">UI مدرن</span>
-                  <span class="tag">Responsive</span>
-                  <span class="tag">Portfolio</span>
+                <div class="work-card-footer">
+                  <div class="work-tags">
+                    <span class="tag">UI مدرن</span>
+                    <span class="tag">Responsive</span>
+                    <span class="tag">Portfolio</span>
+                  </div>
+                  <span class="work-view-link" aria-hidden="true">مشاهده بزرگ</span>
                 </div>
               </div>
             </article>
@@ -359,9 +363,6 @@ $email = setting($settings, 'email', '');
         </div>
         <div class="d-flex gap-2 align-items-center">
           <a class="work-zoom-btn d-inline-grid place-items-center text-center" id="workDownload" href="#" download title="دانلود تصویر">⇩</a>
-          <button type="button" class="work-zoom-btn" id="workZoomOut" title="کوچک‌نمایی">−</button>
-          <button type="button" class="work-zoom-btn" id="workZoomReset" title="ریست">↺</button>
-          <button type="button" class="work-zoom-btn" id="workZoomIn" title="بزرگ‌نمایی">+</button>
         </div>
         <button type="button" class="btn-close btn-close-white ms-0" data-bs-dismiss="modal" aria-label="بستن"></button>
       </div>
@@ -419,6 +420,7 @@ $email = setting($settings, 'email', '');
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/swiper-bundle.min.js"></script>
 <script src="assets/js/sweetalert2.all.min.js"></script>
+<script src="assets/js/portfolio.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   const yearEl = document.getElementById('year');
@@ -452,16 +454,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   if (window.Swiper) {
-    new Swiper('.works-swiper', {
-      loop: true,
-      spaceBetween: 22,
-      grabCursor: true,
-      speed: 650,
-      autoplay: prefersReducedMotion ? false : { delay: 4500, disableOnInteraction: false },
-      navigation: { nextEl: '.works-next', prevEl: '.works-prev' },
-      pagination: { el: '.works-swiper .swiper-pagination', clickable: true },
-      breakpoints: { 0: { slidesPerView: 1.04 }, 768: { slidesPerView: 2.05 }, 1200: { slidesPerView: 3.05 } }
-    });
     new Swiper('.testimonials-swiper', {
       loop: true,
       spaceBetween: 18,
@@ -473,47 +465,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  const modalEl = document.getElementById('workModal');
-  const frame = document.getElementById('workModalFrame');
-  const img = document.getElementById('workModalImg');
-  const title = document.getElementById('workModalTitle');
-  const sub = document.getElementById('workModalSub');
-  const download = document.getElementById('workDownload');
-  if (modalEl && frame && img && window.bootstrap) {
-    const modal = new bootstrap.Modal(modalEl);
-    let zoom = 1;
-    function applyZoom() { img.style.transform = 'scale(' + zoom + ')'; }
-    function openWork(card) {
-      const src = card.dataset.img || '';
-      img.src = src;
-      if (download) download.href = src;
-      title.textContent = card.dataset.title || 'نمایش نمونه‌کار';
-      sub.textContent = card.dataset.sub || '';
-      zoom = 1;
-      applyZoom();
-      modal.show();
-    }
-    document.addEventListener('click', e => {
-      const card = e.target.closest('.work-card');
-      if (!card) return;
-      openWork(card);
-    });
-    document.addEventListener('keydown', e => {
-      if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('work-card')) {
-        e.preventDefault();
-        openWork(e.target);
-      }
-    });
-    document.getElementById('workZoomIn')?.addEventListener('click', () => { zoom = Math.min(4, zoom + .35); applyZoom(); });
-    document.getElementById('workZoomOut')?.addEventListener('click', () => { zoom = Math.max(1, zoom - .35); applyZoom(); });
-    document.getElementById('workZoomReset')?.addEventListener('click', () => { zoom = 1; applyZoom(); frame.scrollTo({ top: 0, left: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' }); });
-    frame.addEventListener('wheel', e => {
-      e.preventDefault();
-      zoom = Math.min(4, Math.max(1, zoom + (e.deltaY < 0 ? .18 : -.18)));
-      applyZoom();
-    }, { passive: false });
-    modalEl.addEventListener('hidden.bs.modal', () => { img.src = ''; });
-  }
 
   const form = document.getElementById('consultForm');
   const consultModalEl = document.getElementById('consultModal');
