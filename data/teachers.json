@@ -1,0 +1,4 @@
+[
+  {"id":"teacher-1","name":"تیم آموزشی 3pe","position":"مدرس طراحی سایت و هوش مصنوعی","description":"تمرکز آموزش روی ساخت پروژه واقعی، ساده‌سازی مسیر یادگیری و آماده‌سازی برای بازار کار است.","image":"","tags":["PHP خام","Bootstrap","AI Workflow"],"experience":"+۷ سال تجربه","sort_order":1,"is_active":true},
+  {"id":"teacher-2","name":"منتور پروژه","position":"راهنمای تمرین و نمونه‌کار","description":"در مسیر تمرین‌ها، خروجی‌ها از نظر ساختار، تجربه کاربری و کیفیت کد بررسی می‌شوند.","image":"","tags":["UI","Debug","Portfolio"],"experience":"+۵ سال تجربه","sort_order":2,"is_active":true}
+]
