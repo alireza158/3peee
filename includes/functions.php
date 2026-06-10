@@ -308,3 +308,138 @@ function render_admin_crud(array $config): void
     </main>
     <?php include APP_ROOT . '/includes/admin-footer.php';
 }
+
+function registration_statuses(): array
+{
+    return ['جدید', 'تماس گرفته شد', 'نیاز به پیگیری', 'ثبت‌نام شد', 'منصرف شد', 'نامعتبر'];
+}
+
+function registration_status_badge_class(string $status): string
+{
+    $classes = [
+        'جدید' => 'text-bg-primary',
+        'تماس گرفته شد' => 'text-bg-info',
+        'نیاز به پیگیری' => 'text-bg-warning',
+        'ثبت‌نام شد' => 'text-bg-success',
+        'منصرف شد' => 'text-bg-secondary',
+        'نامعتبر' => 'text-bg-danger',
+    ];
+    return $classes[$status] ?? 'text-bg-light text-dark';
+}
+
+function clean_text($value, int $maxLength = 500): string
+{
+    $value = trim(strip_tags((string) $value));
+    $value = preg_replace('/\s+/u', ' ', $value) ?? $value;
+    if (function_exists('mb_substr')) {
+        return mb_substr($value, 0, $maxLength, 'UTF-8');
+    }
+    return substr($value, 0, $maxLength);
+}
+
+function clean_multiline($value, int $maxLength = 2000): string
+{
+    $value = trim(strip_tags((string) $value));
+    $value = preg_replace("/\r\n|\r/u", "\n", $value) ?? $value;
+    if (function_exists('mb_substr')) {
+        return mb_substr($value, 0, $maxLength, 'UTF-8');
+    }
+    return substr($value, 0, $maxLength);
+}
+
+function normalize_iran_mobile(string $mobile): string
+{
+    $mobile = trim($mobile);
+    $persian = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹','٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+    $english = ['0','1','2','3','4','5','6','7','8','9','0','1','2','3','4','5','6','7','8','9'];
+    $mobile = str_replace($persian, $english, $mobile);
+    $mobile = preg_replace('/[\s\-()]/', '', $mobile) ?? $mobile;
+    if (substr($mobile, 0, 3) === '+98') {
+        $mobile = '0' . substr($mobile, 3);
+    } elseif (substr($mobile, 0, 2) === '98') {
+        $mobile = '0' . substr($mobile, 2);
+    }
+    return $mobile;
+}
+
+function is_valid_iran_mobile(string $mobile): bool
+{
+    return (bool) preg_match('/^09\d{9}$/', $mobile);
+}
+
+function read_json_array_with_error(string $file, ?string &$error = null): array
+{
+    $error = null;
+    $path = data_path($file);
+    if (!file_exists($path)) {
+        write_json($file, []);
+        return [];
+    }
+    $raw = file_get_contents($path);
+    if ($raw === false) {
+        $error = 'امکان خواندن فایل اطلاعات وجود ندارد.';
+        return [];
+    }
+    if (trim($raw) === '') {
+        write_json($file, []);
+        return [];
+    }
+    $decoded = json_decode($raw, true);
+    if (json_last_error() !== JSON_ERROR_NONE || !is_array($decoded)) {
+        $error = 'ساختار فایل ' . $file . ' معتبر نیست. لطفاً JSON را بررسی کنید.';
+        return [];
+    }
+    return $decoded;
+}
+
+function append_json_array_record_locked(string $file, array $record, ?string &$error = null): bool
+{
+    $error = null;
+    $path = data_path($file);
+    $handle = fopen($path, 'c+');
+    if ($handle === false) {
+        $error = 'امکان باز کردن فایل ذخیره‌سازی وجود ندارد.';
+        return false;
+    }
+    if (!flock($handle, LOCK_EX)) {
+        fclose($handle);
+        $error = 'امکان قفل کردن فایل ذخیره‌سازی وجود ندارد.';
+        return false;
+    }
+    rewind($handle);
+    $raw = stream_get_contents($handle);
+    $items = [];
+    if ($raw !== false && trim($raw) !== '') {
+        $decoded = json_decode($raw, true);
+        if (json_last_error() !== JSON_ERROR_NONE || !is_array($decoded)) {
+            flock($handle, LOCK_UN);
+            fclose($handle);
+            $error = 'ساختار فایل ذخیره‌سازی معتبر نیست و برای جلوگیری از خرابی اطلاعات، ثبت انجام نشد.';
+            return false;
+        }
+        $items = $decoded;
+    }
+    $maxId = 0;
+    foreach ($items as $item) {
+        $maxId = max($maxId, (int) ($item['id'] ?? 0));
+    }
+    $record['id'] = $maxId + 1;
+    $items[] = $record;
+    $json = json_encode($items, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    if ($json === false) {
+        flock($handle, LOCK_UN);
+        fclose($handle);
+        $error = 'امکان تبدیل اطلاعات به JSON وجود ندارد.';
+        return false;
+    }
+    rewind($handle);
+    ftruncate($handle, 0);
+    $ok = fwrite($handle, $json) !== false;
+    fflush($handle);
+    flock($handle, LOCK_UN);
+    fclose($handle);
+    if (!$ok) {
+        $error = 'امکان نوشتن اطلاعات در فایل وجود ندارد.';
+    }
+    return $ok;
+}
