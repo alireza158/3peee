@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/includes/functions.php';
-$settings = read_json('settings.json', []); if(!is_array($settings)){$settings=[];}
+$settings = read_json('settings.json', []);
+if (!is_array($settings)) {
+    $settings = [];
+}
 $works = active_items('works.json');
 $syllabus = active_items('syllabus.json');
 $gifts = active_items('gifts.json');
@@ -11,6 +14,10 @@ $title = setting($settings, 'site_title', '3pe | دوره طراحی سایت ب
 $description = setting($settings, 'site_description', 'دوره طراحی سایت با هوش مصنوعی');
 $logo = setting($settings, 'logo', 'assets/logo.png');
 $heroImage = setting($settings, 'hero_image', 'assets/images/ai-hero.png');
+$telegram = setting($settings, 'telegram_link', '#');
+$instagram = setting($settings, 'instagram_link', '#');
+$phone = setting($settings, 'phone', '');
+$email = setting($settings, 'email', '');
 ?>
 <!doctype html>
 <html lang="fa" dir="rtl">
@@ -22,26 +29,530 @@ $heroImage = setting($settings, 'hero_image', 'assets/images/ai-hero.png');
   <link rel="icon" type="image/png" href="<?= e($logo) ?>">
   <link href="assets/css/bootstrap.rtl.min.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-  <style>
-    @font-face{font-family:Vazirmatn;src:url('assets/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
-    :root{--primary:#5b21b6;--primary2:#7c3aed;--secondary:#0284c7;--dark:#0f172a;--text:#1e293b;--muted:#64748b;--line:rgba(15,23,42,.09);--card:rgba(255,255,255,.92);--shadow:0 20px 55px rgba(15,23,42,.09);--radius:24px}
-    *{box-sizing:border-box} html{scroll-behavior:smooth;scroll-padding-top:100px} body{margin:0;font-family:Vazirmatn,Tahoma,sans-serif;color:var(--text);background:radial-gradient(900px 450px at 85% -10%,rgba(91,33,182,.13),transparent 60%),radial-gradient(850px 430px at 5% 8%,rgba(2,132,199,.11),transparent 62%),linear-gradient(180deg,#f8fafc 0%,#fff 48%,#f8fafc 100%);overflow-x:hidden} a{text-decoration:none;color:inherit} p{line-height:2}.fw-black{font-weight:950}.text-muted-custom{color:var(--muted)}.section{padding:76px 0}.section-head{max-width:780px;margin:0 auto 34px;text-align:center}.section-kicker{display:inline-flex;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(91,33,182,.10);color:var(--primary);font-size:13px;font-weight:850;margin-bottom:12px}.section-title{color:var(--dark);font-weight:950}.grad-text{background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;background-clip:text;color:transparent}.btn{font-weight:900}.btn-brand{border:0;color:#fff!important;background:linear-gradient(90deg,var(--primary),var(--secondary));box-shadow:0 14px 32px rgba(91,33,182,.18)}.btn-register-cta{border:0;color:#fff!important;background:linear-gradient(90deg,#7c3aed,#0284c7);box-shadow:0 18px 40px rgba(91,33,182,.25);font-size:1.02rem}.mini-cta{padding:28px;border-radius:28px;background:linear-gradient(135deg,rgba(91,33,182,.10),rgba(2,132,199,.10));border:1px solid rgba(91,33,182,.12)}.btn-soft{border:1px solid var(--line);background:rgba(255,255,255,.86)}.btn-telegram{border:1px solid rgba(34,158,217,.18);background:rgba(34,158,217,.10);color:#087db3!important}.btn-instagram{border:0;color:#fff!important;background:linear-gradient(135deg,#833AB4,#E1306C,#FCAF45)}.icon{width:52px;height:52px;display:inline-flex;align-items:center;justify-content:center;border-radius:18px;background:linear-gradient(135deg,rgba(91,33,182,.10),rgba(2,132,199,.10));border:1px solid rgba(91,33,182,.08);font-size:24px}.site-header{position:sticky;top:0;z-index:1040;background:rgba(255,255,255,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.progress-line{position:absolute;top:0;right:0;height:3px;width:0;background:linear-gradient(90deg,var(--secondary),var(--primary))}.brand{display:flex;align-items:center;gap:10px;font-weight:950}.brand img{width:46px;height:46px;object-fit:contain}.nav-link{font-weight:850;color:#334155!important}.hero{position:relative;padding:92px 0 80px}.hero-title{font-size:clamp(2.2rem,5vw,4.7rem);font-weight:950;line-height:1.35;color:var(--dark)}.hero-text{font-size:1.08rem;color:var(--muted);max-width:620px}.badge-soft{display:inline-flex;padding:9px 13px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:800;font-size:13px}.hero-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.hero-image-card,.work-card,.syllabus-card,.gift-card,.teacher-card,.testimonial-card,.faq-side{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.hero-image-card{padding:16px;transform:rotate(-1.5deg)}.hero-main-image{width:100%;border-radius:20px;display:block}.works-section{background:linear-gradient(180deg,rgba(91,33,182,.04),rgba(2,132,199,.04))}.work-card{overflow:hidden;cursor:pointer;height:100%}.work-img-wrap{position:relative;background:#eef2ff}.work-img-wrap img{width:100%;height:330px;object-fit:contain;display:block}.work-label,.work-open{position:absolute;top:14px;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:900}.work-label{right:14px;background:#fff;color:var(--primary)}.work-open{left:14px;background:rgba(15,23,42,.78);color:#fff}.work-info{padding:20px}.work-info h3,.syllabus-card h3,.teacher-card h3{font-size:1.1rem;font-weight:950}.syllabus-card,.gift-card,.teacher-card,.testimonial-card{padding:24px;height:100%}.tag{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:12px;font-weight:800;margin:3px;background:#fff}.avatar{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;font-weight:950}.teacher-photo{width:84px;height:84px;border-radius:28px;object-fit:cover;background:linear-gradient(135deg,rgba(91,33,182,.12),rgba(2,132,199,.12));display:grid;place-items:center;font-size:32px}.cta-box{background:linear-gradient(135deg,var(--primary),var(--secondary));border-radius:32px;color:#fff;padding:34px;box-shadow:var(--shadow)}footer{border-top:1px solid var(--line);padding:30px 0;background:#fff}.form-control,.form-select{border-radius:16px;padding:.8rem 1rem}.work-modal .modal-content{background:#0f172a;color:#fff}.work-modal-frame{height:min(72vh,760px);overflow:hidden;display:grid;place-items:center;background:#020617;border-radius:18px}.work-modal-img{max-width:100%;max-height:100%;transition:transform .12s ease;transform-origin:center}.work-zoom-btn{border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.12);color:#fff;border-radius:12px;width:38px;height:38px}.empty-box{border:1px dashed var(--line);border-radius:22px;padding:28px;text-align:center;color:var(--muted);background:#fff}@media(max-width:991px){.section{padding:54px 0}.hero{padding-top:54px}.work-img-wrap img{height:260px}}
-  </style>
+  <link rel="stylesheet" href="assets/css/landing.css">
 </head>
-<body data-bs-spy="scroll" data-bs-target="#topNav" data-bs-offset="110">
-<header class="site-header" id="topNav"><div class="progress-line" id="progressLine"></div><nav class="navbar navbar-expand-lg"><div class="container"><a class="brand" href="#"><img src="<?= e($logo) ?>" alt="3pe"><span>3pe</span></a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="nav"><ul class="navbar-nav mx-auto gap-lg-2"><li class="nav-item"><a class="nav-link" href="#works">نمونه‌کارها</a></li><li class="nav-item"><a class="nav-link" href="#syllabus">سرفصل‌ها</a></li><li class="nav-item"><a class="nav-link" href="#gifts">هدایا</a></li><li class="nav-item"><a class="nav-link" href="#teachers">اساتید</a></li><li class="nav-item"><a class="nav-link" href="#testimonials">نظرات</a></li><li class="nav-item"><a class="nav-link" href="#faq">سوالات</a></li><li class="nav-item"><a class="nav-link" href="register.php">ثبت‌نام رایگان</a></li></ul><a class="btn btn-register-cta rounded-pill px-4" href="register.php">🚀 ثبت نام رایگان دوره آموزشی</a><button class="btn btn-soft rounded-pill px-4 me-lg-2 mt-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#consultModal">مشاوره رایگان</button></div></div></nav></header>
-<section class="hero"><div class="container"><div class="row align-items-center g-4"><div class="col-lg-6"><div class="section-kicker">✨ دوره پروژه‌محور طراحی سایت با هوش مصنوعی</div><h1 class="hero-title"><?= e(setting($settings,'hero_title','طراحی سایت حرفه‌ای با کمک هوش مصنوعی')) ?></h1><p class="hero-text"><?= e(setting($settings,'hero_text',$description)) ?></p><div class="d-flex flex-wrap gap-2 mt-4"><a class="btn btn-register-cta btn-lg rounded-pill px-5 py-3" href="register.php">✨ ثبت نام رایگان دوره آموزشی</a><button class="btn btn-soft rounded-pill px-4 py-3" data-bs-toggle="modal" data-bs-target="#consultModal">ثبت درخواست مشاوره</button><a class="btn btn-soft rounded-pill px-4 py-3" href="#works">دیدن نمونه‌کارها</a></div><div class="hero-pills"><span class="badge-soft">✅ پروژه‌محور</span><span class="badge-soft">✅ مناسب بازار کار</span><span class="badge-soft">✅ تمرین واقعی</span></div></div><div class="col-lg-6"><div class="hero-image-card"><img src="<?= e($heroImage) ?>" alt="مسیر ساخت سایت با هوش مصنوعی" class="hero-main-image"></div></div></div></div></section>
-<section id="works" class="section works-section"><div class="container-fluid px-lg-5"><div class="section-head"><div class="section-kicker">🖼️ نمونه‌کارها</div><h2 class="section-title h1">نمونه‌کارهای دانشجویان</h2><p class="text-muted-custom">نمونه خروجی‌هایی که با کلیک در مودال بزرگ قابل مشاهده هستند.</p></div><?php if(!$works): ?><div class="empty-box">نمونه‌کاری برای نمایش ثبت نشده است.</div><?php else: ?><div class="swiper works-swiper"><div class="swiper-wrapper"><?php foreach($works as $work): ?><div class="swiper-slide"><article class="work-card" data-title="<?= e($work['title'] ?? '') ?>" data-sub="<?= e($work['subtitle'] ?? '') ?>" data-img="<?= e($work['image'] ?? '') ?>"><div class="work-img-wrap"><span class="work-label"><?= e($work['label'] ?? 'نمونه') ?></span><span class="work-open">کلیک برای زوم</span><img src="<?= e($work['image'] ?? '') ?>" alt="<?= e($work['title'] ?? '') ?>" loading="lazy"></div><div class="work-info"><h3><?= e($work['title'] ?? '') ?></h3><p class="text-muted-custom mb-0"><?= e($work['description'] ?? '') ?></p></div></article></div><?php endforeach; ?></div><div class="swiper-pagination mt-4 position-static"></div></div><?php endif; ?></div></section>
-<section id="syllabus" class="section"><div class="container"><div class="section-head"><div class="section-kicker">📚 سرفصل‌ها</div><h2 class="section-title h1">مسیر یادگیری دوره</h2></div><div class="row g-4"><?php if(!$syllabus): ?><div class="col-12"><div class="empty-box">سرفصلی ثبت نشده است.</div></div><?php endif; foreach($syllabus as $item): ?><div class="col-md-6 col-lg-4"><div class="syllabus-card"><div class="icon mb-3"><?= e($item['icon'] ?? '📌') ?></div><div class="small fw-bold text-muted">مرحله <?= e($item['step_number'] ?? '') ?></div><h3><?= e($item['title'] ?? '') ?></h3><p class="text-muted-custom"><?= e($item['description'] ?? '') ?></p><?php foreach(($item['tags'] ?? []) as $tag): ?><span class="tag"><?= e($tag) ?></span><?php endforeach; ?></div></div><?php endforeach; ?></div></div></section><div class="container mt-4"><div class="mini-cta d-flex flex-wrap align-items-center justify-content-between gap-3"><div><h3 class="h5 fw-black mb-1">برای شروع مسیر طراحی سایت آماده‌ای؟</h3><p class="text-muted-custom mb-0">فرم کوتاه را پر کن تا مسیر مناسب سطح تو مشخص شود.</p></div><a class="btn btn-register-cta rounded-pill px-4 py-3" href="register.php">✨ ثبت نام رایگان دوره آموزشی</a></div></div>
-<section id="gifts" class="section"><div class="container"><div class="section-head"><div class="section-kicker">🎁 هدایا</div><h2 class="section-title h1">هدایای همراه دوره</h2></div><div class="row g-4"><?php if(!$gifts): ?><div class="col-12"><div class="empty-box">هدیه‌ای ثبت نشده است.</div></div><?php endif; foreach($gifts as $gift): ?><div class="col-md-4"><div class="gift-card"><div class="icon mb-3"><?= e($gift['icon'] ?? '🎁') ?></div><h3 class="h5 fw-black"><?= e($gift['title'] ?? '') ?></h3><p class="text-muted-custom mb-0"><?= e($gift['description'] ?? '') ?></p></div></div><?php endforeach; ?></div></div></section><div class="container mt-4"><div class="mini-cta text-center"><h3 class="h5 fw-black mb-2">هدایا را همراه ثبت‌نام رایگان دریافت کن</h3><a class="btn btn-register-cta rounded-pill px-4 py-3" href="register.php">✨ ثبت نام رایگان دوره آموزشی</a></div></div>
-<section id="teachers" class="section"><div class="container"><div class="section-head"><div class="section-kicker">👨‍🏫 اساتید</div><h2 class="section-title h1">درباره اساتید</h2></div><div class="row g-4"><?php if(!$teachers): ?><div class="col-12"><div class="empty-box">استادی برای نمایش ثبت نشده است.</div></div><?php endif; foreach($teachers as $teacher): ?><div class="col-md-6"><div class="teacher-card"><div class="d-flex gap-3 align-items-center mb-3"><?php if(!empty($teacher['image'])): ?><img class="teacher-photo" src="<?= e($teacher['image']) ?>" alt="<?= e($teacher['name'] ?? '') ?>"><?php else: ?><div class="teacher-photo">👨‍🏫</div><?php endif; ?><div><h3 class="mb-1"><?= e($teacher['name'] ?? '') ?></h3><div class="text-muted-custom"><?= e($teacher['position'] ?? '') ?></div><div class="small fw-bold text-primary"><?= e($teacher['experience'] ?? '') ?></div></div></div><p class="text-muted-custom"><?= e($teacher['description'] ?? '') ?></p><?php foreach(($teacher['tags'] ?? []) as $tag): ?><span class="tag"><?= e($tag) ?></span><?php endforeach; ?></div></div><?php endforeach; ?></div></div></section>
-<section id="testimonials" class="section"><div class="container"><div class="section-head"><div class="section-kicker">⭐ نظرات</div><h2 class="section-title h1">نظرات دانشجویان</h2></div><?php if(!$testimonials): ?><div class="empty-box">نظری برای نمایش ثبت نشده است.</div><?php else: ?><div class="swiper testimonials-swiper"><div class="swiper-wrapper"><?php foreach($testimonials as $t): ?><div class="swiper-slide"><div class="testimonial-card"><div class="d-flex align-items-center gap-3 mb-3"><div class="avatar"><?= e($t['avatar_letter'] ?? mb_substr((string)($t['name'] ?? '؟'),0,1)) ?></div><div><div class="fw-black"><?= e($t['name'] ?? '') ?></div><div class="small text-muted"><?= e($t['role'] ?? '') ?></div></div></div><div class="mb-2"><?= str_repeat('⭐', max(1,min(5,(int)($t['rating'] ?? 5)))) ?></div><p class="text-muted-custom mb-0"><?= e($t['comment'] ?? '') ?></p></div></div><?php endforeach; ?></div><div class="swiper-pagination mt-4 position-static"></div></div><?php endif; ?></div></section><section class="section pt-0"><div class="container"><div class="cta-box d-flex flex-wrap align-items-center justify-content-between gap-3"><div><h2 class="h3 fw-black mb-2">ثبت نام رایگان دوره آموزشی</h2><p class="mb-0 opacity-75">همین حالا فرم را تکمیل کن تا مشاور دوره با توجه به سطح و هدف تو تماس بگیرد.</p></div><a class="btn btn-light rounded-pill px-5 py-3 fw-black" href="register.php">🚀 ثبت نام رایگان دوره آموزشی</a></div></div></section>
-<section id="faq" class="section"><div class="container"><div class="section-head"><div class="section-kicker">❓ سوالات متداول</div><h2 class="section-title h1">سوالات متداول</h2></div><div class="row g-4"><div class="col-lg-8"><div class="accordion" id="faqAccordion"><?php if(!$faqs): ?><div class="empty-box">سوالی ثبت نشده است.</div><?php endif; foreach($faqs as $i=>$faq): ?><div class="accordion-item mb-3 border-0 shadow-sm rounded-4 overflow-hidden"><h2 class="accordion-header"><button class="accordion-button <?= $i ? 'collapsed' : '' ?> fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq<?= e($i) ?>"><?= e($faq['question'] ?? '') ?></button></h2><div id="faq<?= e($i) ?>" class="accordion-collapse collapse <?= $i ? '' : 'show' ?>" data-bs-parent="#faqAccordion"><div class="accordion-body text-muted-custom"><?= nl2br(e($faq['answer'] ?? '')) ?></div></div></div><?php endforeach; ?></div></div><div class="col-lg-4"><div class="faq-side p-4"><h3 class="fw-black mb-2">هنوز سوال داری؟</h3><p class="text-muted-custom">فرم مشاوره را پر کن تا همکاران ما راهنمایی‌ات کنند.</p><button class="btn btn-brand rounded-pill px-4 py-3" data-bs-toggle="modal" data-bs-target="#consultModal">درخواست مشاوره</button></div></div></div></div></section>
-<section class="section pt-0"><div class="container"><div class="cta-box d-flex flex-wrap justify-content-between align-items-center gap-3"><div><h2 class="fw-black mb-2">آماده‌ای طراحی سایت را با AI جدی شروع کنی؟</h2><p class="mb-0 opacity-75">یک درخواست مشاوره رایگان ثبت کن.</p></div><button class="btn btn-light rounded-pill px-4 py-3" data-bs-toggle="modal" data-bs-target="#consultModal">ثبت درخواست</button></div></div></section>
-<footer><div class="container d-flex flex-wrap justify-content-between gap-3"><span><?= e(setting($settings,'footer_text','© 3pe')) ?> — <span id="year"></span></span><div class="d-flex gap-3"><a href="<?= e(setting($settings,'telegram_link','#')) ?>" target="_blank" rel="noopener">تلگرام</a><a href="<?= e(setting($settings,'instagram_link','#')) ?>" target="_blank" rel="noopener">اینستاگرام</a><a href="mailto:<?= e(setting($settings,'email','')) ?>"><?= e(setting($settings,'email','')) ?></a></div></div></footer>
-<div class="modal fade work-modal" id="workModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-fullscreen-lg-down"><div class="modal-content"><div class="modal-header"><div><h5 class="modal-title fw-black mb-1" id="workModalTitle">نمایش نمونه‌کار</h5><div class="small text-white-50" id="workModalSub"></div></div><div class="d-flex gap-2"><button type="button" class="work-zoom-btn" id="workZoomOut">−</button><button type="button" class="work-zoom-btn" id="workZoomReset">↺</button><button type="button" class="work-zoom-btn" id="workZoomIn">+</button></div><button type="button" class="btn-close btn-close-white ms-0" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="work-modal-frame" id="workModalFrame"><img id="workModalImg" class="work-modal-img" src="" alt="نمایش نمونه کار"></div></div></div></div></div>
-<div class="modal fade" id="consultModal" tabindex="-1" aria-labelledby="consultModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title fw-black" id="consultModalLabel">فرم دریافت مشاوره ثبت‌نام</h5><button type="button" class="btn-close ms-0" data-bs-dismiss="modal"></button></div><div class="modal-body"><form id="consultForm" class="needs-validation" novalidate action="save_consult.php" method="post"><div class="row g-3"><div class="col-md-6"><label class="form-label fw-bold" for="fullName">نام و نام خانوادگی</label><input type="text" class="form-control" id="fullName" name="fullName" required><div class="invalid-feedback">نام را وارد کنید.</div></div><div class="col-md-6"><label class="form-label fw-bold" for="phone">شماره تماس</label><input type="tel" class="form-control" id="phone" name="phone" pattern="^(\+98|0)?9\d{9}$" required><div class="invalid-feedback">شماره معتبر وارد کنید.</div></div><div class="col-12"><label class="form-label fw-bold" for="level">سطح فعلی</label><select class="form-select" id="level" name="level"><option value="">انتخاب کنید…</option><option value="beginner">کاملاً مبتدی</option><option value="basic">آشنایی اولیه با طراحی سایت</option><option value="intermediate">در حال اجرای پروژه</option><option value="advanced">طراح سایت و دنبال رشد درآمد</option></select></div><div class="col-12"><label class="form-label fw-bold" for="message">هدف یا توضیحات</label><textarea class="form-control" id="message" name="message" rows="4"></textarea></div><div class="col-12"><button type="submit" class="btn btn-brand w-100 rounded-4 py-3">ثبت درخواست مشاوره</button></div></div></form></div></div></div></div>
-<script src="assets/js/bootstrap.bundle.min.js"></script><script src="assets/js/swiper-bundle.min.js"></script><script src="assets/js/sweetalert2.all.min.js"></script><script>
-document.addEventListener('DOMContentLoaded',function(){const yearEl=document.getElementById('year');if(yearEl)yearEl.textContent=new Date().getFullYear();const progressLine=document.getElementById('progressLine');function updateProgress(){if(!progressLine)return;const d=document.documentElement;const p=(d.scrollTop/(d.scrollHeight-d.clientHeight))*100;progressLine.style.width=Math.min(100,Math.max(0,p||0))+'%'}updateProgress();window.addEventListener('scroll',updateProgress,{passive:true});if(window.Swiper){new Swiper('.works-swiper',{loop:true,spaceBetween:18,grabCursor:true,pagination:{el:'.works-swiper .swiper-pagination',clickable:true},breakpoints:{0:{slidesPerView:1.05},768:{slidesPerView:2.05},1200:{slidesPerView:3.05}}});new Swiper('.testimonials-swiper',{loop:true,spaceBetween:16,grabCursor:true,pagination:{el:'.testimonials-swiper .swiper-pagination',clickable:true},breakpoints:{0:{slidesPerView:1},768:{slidesPerView:2},1200:{slidesPerView:3}}})}const modalEl=document.getElementById('workModal'),frame=document.getElementById('workModalFrame'),img=document.getElementById('workModalImg'),title=document.getElementById('workModalTitle'),sub=document.getElementById('workModalSub');if(modalEl&&frame&&img&&window.bootstrap){const modal=new bootstrap.Modal(modalEl);let zoom=1;function apply(){img.style.transform='scale('+zoom+')'}document.addEventListener('click',e=>{const card=e.target.closest('.work-card');if(!card)return;img.src=card.dataset.img||'';title.textContent=card.dataset.title||'نمایش نمونه‌کار';sub.textContent=card.dataset.sub||'';zoom=1;apply();modal.show()});document.getElementById('workZoomIn')?.addEventListener('click',()=>{zoom=Math.min(4,zoom+.35);apply()});document.getElementById('workZoomOut')?.addEventListener('click',()=>{zoom=Math.max(1,zoom-.35);apply()});document.getElementById('workZoomReset')?.addEventListener('click',()=>{zoom=1;apply()});frame.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.min(4,Math.max(1,zoom+(e.deltaY<0?.18:-.18)));apply()},{passive:false});modalEl.addEventListener('hidden.bs.modal',()=>{img.src=''})}const form=document.getElementById('consultForm'),consultModalEl=document.getElementById('consultModal');function showMessage(type,title,text){if(window.Swal){Swal.fire({icon:type,title:title,text:text,confirmButtonText:'باشه'})}else alert(title+'\n'+text)}if(form){form.addEventListener('submit',function(event){event.preventDefault();if(!form.checkValidity()){event.stopPropagation();form.classList.add('was-validated');return}const btn=form.querySelector('button[type="submit"]'),old=btn.innerHTML;btn.disabled=true;btn.innerHTML='در حال ثبت...';fetch(form.action,{method:'POST',body:new FormData(form)}).then(r=>r.json()).then(data=>{if(!data||!data.ok){showMessage('error','خطا',data&&data.message?data.message:'دوباره تلاش کنید.');return}showMessage('success','ثبت شد ✅','درخواست مشاوره شما با موفقیت ثبت شد.');form.reset();form.classList.remove('was-validated');if(window.bootstrap&&consultModalEl)(bootstrap.Modal.getInstance(consultModalEl)||new bootstrap.Modal(consultModalEl)).hide()}).catch(()=>showMessage('error','مشکل ارتباط با سرور','دوباره تلاش کنید.')).finally(()=>{btn.disabled=false;btn.innerHTML=old})})}});
+<body>
+<header class="site-header">
+  <div class="progress-line" id="progressLine"></div>
+  <nav class="navbar navbar-expand-lg py-3">
+    <div class="container">
+      <a class="navbar-brand brand" href="#top" aria-label="3pe">
+        <img src="<?= e($logo) ?>" alt="3pe logo">
+        <span>3pe</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="باز کردن منو">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto gap-lg-1 mt-3 mt-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#works">نمونه‌کارها</a></li>
+          <li class="nav-item"><a class="nav-link" href="#syllabus">سرفصل‌ها</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gifts">هدایا</a></li>
+          <li class="nav-item"><a class="nav-link" href="#teachers">اساتید</a></li>
+          <li class="nav-item"><a class="nav-link" href="#testimonials">نظرات</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">سوالات</a></li>
+        </ul>
+        <div class="d-flex gap-2 mt-3 mt-lg-0">
+          <button class="btn btn-soft rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#consultModal">مشاوره</button>
+          <a class="btn btn-register-cta rounded-pill px-4" href="register.php">🚀 ثبت نام رایگان دوره آموزشی</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 reveal">
+          <span class="section-kicker">✨ دوره پروژه‌محور طراحی سایت با AI</span>
+          <h1 class="hero-title mb-4"><?= e(setting($settings, 'hero_title', 'طراحی سایت حرفه‌ای با کمک هوش مصنوعی')) ?></h1>
+          <p class="hero-text mb-4"><?= e(setting($settings, 'hero_text', 'سریع‌تر، تمیزتر و پول‌سازتر طراحی سایت یاد بگیر.')) ?></p>
+          <div class="d-flex flex-wrap gap-3 mb-4">
+            <a class="btn btn-register-cta rounded-pill px-4 py-3" href="register.php">🚀 ثبت نام رایگان دوره آموزشی</a>
+            <a class="btn btn-soft rounded-pill px-4 py-3" href="#works">مشاهده نمونه‌کارها</a>
+          </div>
+          <div class="hero-pills">
+            <span class="badge-soft">⚡ خروجی واقعی</span>
+            <span class="badge-soft">🤖 ورک‌فلو هوش مصنوعی</span>
+            <span class="badge-soft">💼 آماده بازار کار</span>
+            <span class="badge-soft">📱 کاملاً ریسپانسیو</span>
+          </div>
+          <div class="trust-strip d-flex flex-wrap gap-3 align-items-center">
+            <span class="mini-stat">+ پروژه قابل ارائه</span>
+            <span class="mini-stat">منتورینگ مسیر تمرین</span>
+            <span class="mini-stat">ثبت‌نام اولیه رایگان</span>
+          </div>
+        </div>
+        <div class="col-lg-6 reveal">
+          <div class="hero-image-card">
+            <img class="hero-main-image" src="<?= e($heroImage) ?>" alt="دوره طراحی سایت با هوش مصنوعی">
+            <div class="floating-chip">AI + Bootstrap RTL + PHP خام</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section works-section" id="works">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-kicker">🖼️ Showcase حرفه‌ای</span>
+        <h2 class="section-title display-6 mb-3">نمونه‌کارهایی که نشان می‌دهند خروجی دوره فقط تئوری نیست</h2>
+        <p class="section-lead">چند خروجی واقعی و قابل ارائه از جنس لندینگ، فروشگاه و صفحات محصول؛ با تصویر واضح، جزئیات قابل بررسی و ساختار مناسب رزومه.</p>
+      </div>
+      <div class="showcase-toolbar reveal">
+        <div class="d-flex flex-wrap gap-2">
+          <span class="badge-soft">نمونه دانشجویی</span>
+          <span class="badge-soft">طراحی ریسپانسیو</span>
+          <span class="badge-soft">قابل ارائه به کارفرما</span>
+        </div>
+        <div class="swiper-controls" aria-label="کنترل نمونه‌کارها">
+          <button class="swiper-button-prev works-prev" type="button"></button>
+          <button class="swiper-button-next works-next" type="button"></button>
+        </div>
+      </div>
+      <div class="swiper works-swiper reveal">
+        <div class="swiper-wrapper">
+          <?php foreach ($works as $work):
+              $workTitle = (string)($work['title'] ?? 'نمونه‌کار دوره');
+              $workSub = (string)($work['subtitle'] ?? 'خروجی قابل ارائه ساخته‌شده در مسیر دوره');
+              $workDesc = (string)($work['description'] ?? 'طراحی تمیز، مدرن و ریسپانسیو با جزئیات قابل بررسی.');
+              $workImage = (string)($work['image'] ?? 'assets/logo.png');
+              $workLabel = (string)($work['label'] ?? 'نمونه دانشجویی');
+          ?>
+          <div class="swiper-slide">
+            <article class="work-card" role="button" tabindex="0" data-img="<?= e($workImage) ?>" data-title="<?= e($workTitle) ?>" data-sub="<?= e($workSub) ?>">
+              <div class="work-img-wrap">
+                <span class="work-label"><?= e($workLabel !== '' ? $workLabel : 'نمونه دانشجویی') ?></span>
+                <img src="<?= e($workImage) ?>" alt="<?= e($workTitle) ?>" loading="lazy">
+                <div class="work-overlay"><span class="work-open-btn">🔍 مشاهده بزرگ</span></div>
+              </div>
+              <div class="work-info">
+                <h3><?= e($workTitle) ?></h3>
+                <p class="text-muted-custom mb-2"><?= e($workDesc) ?></p>
+                <div class="work-tags">
+                  <span class="tag">UI مدرن</span>
+                  <span class="tag">Responsive</span>
+                  <span class="tag">Portfolio</span>
+                </div>
+              </div>
+            </article>
+          </div>
+          <?php endforeach; ?>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+      <div class="showcase-note text-center reveal">این نمونه‌ها نشان می‌دهند بعد از دوره می‌توانید خروجی واقعی و قابل ارائه بسازید.</div>
+    </div>
+  </section>
+
+  <section class="section" id="syllabus">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-kicker">🧭 مسیر یادگیری</span>
+        <h2 class="section-title display-6 mb-3">از صفر تا ساخت سایت واقعی، قدم‌به‌قدم</h2>
+        <p class="section-lead">مسیر دوره طوری طراحی شده که فقط تماشا نکنید؛ خروجی بسازید، خطا بگیرید، اصلاح کنید و در نهایت پروژه قابل ارائه داشته باشید.</p>
+      </div>
+      <div class="row g-4 learning-path">
+        <?php foreach ($syllabus as $item):
+            $tags = normalize_tags($item['tags'] ?? []);
+            $step = (string)($item['step_number'] ?? '');
+            $icon = (string)($item['icon'] ?? '✨');
+        ?>
+        <div class="col-md-6 reveal">
+          <article class="syllabus-card">
+            <div class="d-flex align-items-center justify-content-between gap-3 mb-4">
+              <div class="step-number"><?= e($step !== '' ? $step : '•') ?></div>
+              <div class="step-icon"><?= e($icon !== '' ? $icon : '✨') ?></div>
+            </div>
+            <h3 class="fw-black h5 mb-3"><?= e($item['title'] ?? 'مرحله دوره') ?></h3>
+            <p class="text-muted-custom mb-3"><?= e($item['description'] ?? '') ?></p>
+            <div class="d-flex flex-wrap gap-1">
+              <?php foreach ($tags as $tag): ?><span class="tag"><?= e($tag) ?></span><?php endforeach; ?>
+            </div>
+          </article>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </section>
+
+  <section class="section gift-section" id="gifts">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-kicker">🎁 Bonus Pack</span>
+        <h2 class="section-title display-6 mb-3">هدایایی که ارزش عملی دوره را چند برابر می‌کنند</h2>
+        <p class="section-lead">ابزارهای آماده برای سریع‌تر ساختن پروژه، تحویل حرفه‌ای و شروع همکاری با مشتری.</p>
+      </div>
+      <div class="row g-4">
+        <?php foreach ($gifts as $gift): ?>
+        <div class="col-sm-6 col-lg-4 col-xl-3 reveal">
+          <article class="gift-card">
+            <span class="gift-badge mb-3">هدیه دوره</span>
+            <div class="gift-icon"><?= e($gift['icon'] ?? '🎁') ?></div>
+            <h3 class="h5 fw-black mb-3"><?= e($gift['title'] ?? 'هدیه دوره') ?></h3>
+            <p class="text-muted-custom mb-0"><?= e($gift['description'] ?? '') ?></p>
+          </article>
+        </div>
+        <?php endforeach; ?>
+      </div>
+      <div class="mini-cta mt-5 reveal d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
+        <div>
+          <h3 class="fw-black h4 mb-2">این هدایا کمک می‌کنند سریع‌تر پروژه واقعی بسازی</h3>
+          <p class="text-muted-custom mb-0">ثبت‌نام کن تا مسیر شروع، تمرین و خروجی گرفتن برایت روشن‌تر شود.</p>
+        </div>
+        <a class="btn btn-register-cta rounded-pill px-4 py-3" href="register.php">✨ ثبت نام رایگان دوره آموزشی</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="teachers">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-kicker">👨‍🏫 تیم آموزشی</span>
+        <h2 class="section-title display-6 mb-3">منتورهایی که مسیر پروژه واقعی را ساده‌تر می‌کنند</h2>
+        <p class="section-lead">تمرکز آموزش روی اجرای عملی، کیفیت UI، دیباگ و آماده‌سازی نمونه‌کار قابل اعتماد است.</p>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <?php foreach ($teachers as $teacher):
+            $tags = normalize_tags($teacher['tags'] ?? []);
+            $teacherImage = trim((string)($teacher['image'] ?? ''));
+        ?>
+        <div class="col-md-6 col-lg-5 reveal">
+          <article class="teacher-card">
+            <div class="d-flex gap-3 align-items-center mb-4">
+              <?php if ($teacherImage !== ''): ?>
+                <img class="teacher-photo" src="<?= e($teacherImage) ?>" alt="<?= e($teacher['name'] ?? 'استاد دوره') ?>" loading="lazy">
+              <?php else: ?>
+                <div class="teacher-avatar" aria-hidden="true">
+                  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="22" r="12" fill="#6d28d9"/><path d="M12 55c3-12 11-19 20-19s17 7 20 19" fill="#0284c7"/><path d="M18 54c3-8 8-12 14-12s11 4 14 12" fill="white" fill-opacity=".5"/></svg>
+                </div>
+              <?php endif; ?>
+              <div>
+                <h3 class="h5 fw-black mb-1"><?= e($teacher['name'] ?? 'استاد دوره') ?></h3>
+                <p class="text-muted-custom mb-2"><?= e($teacher['position'] ?? 'مدرس دوره') ?></p>
+                <span class="stat-badge bg-white rounded-pill border"><?= e($teacher['experience'] ?? 'تجربه پروژه واقعی') ?></span>
+              </div>
+            </div>
+            <p class="text-muted-custom"><?= e($teacher['description'] ?? '') ?></p>
+            <div class="d-flex flex-wrap gap-1"><?php foreach ($tags as $tag): ?><span class="tag"><?= e($tag) ?></span><?php endforeach; ?></div>
+          </article>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="testimonials">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-kicker">⭐ تجربه دانشجویان</span>
+        <h2 class="section-title display-6 mb-3">نظر کسانی که مسیر ساخت خروجی واقعی را شروع کرده‌اند</h2>
+        <p class="section-lead">Review cardهای کوتاه، شفاف و قابل اعتماد از تجربه یادگیری پروژه‌محور.</p>
+      </div>
+      <div class="swiper testimonials-swiper reveal">
+        <div class="swiper-wrapper">
+          <?php foreach ($testimonials as $testimonial):
+              $rating = max(0, min(5, (int)($testimonial['rating'] ?? 5)));
+              $fallbackName = (string)($testimonial['name'] ?? 'د');
+              $letter = (string)($testimonial['avatar_letter'] ?? (function_exists('mb_substr') ? mb_substr($fallbackName, 0, 1) : substr($fallbackName, 0, 1)));
+          ?>
+          <div class="swiper-slide">
+            <article class="testimonial-card">
+              <div class="quote-mark">”</div>
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="avatar"><?= e($letter) ?></div>
+                <div>
+                  <h3 class="h6 fw-black mb-1"><?= e($testimonial['name'] ?? 'دانشجوی دوره') ?></h3>
+                  <p class="small text-muted-custom mb-1"><?= e($testimonial['role'] ?? 'دانشجو') ?></p>
+                  <div class="stars" aria-label="<?= e($rating) ?> از ۵"><?= str_repeat('★', $rating) . str_repeat('☆', 5 - $rating) ?></div>
+                </div>
+              </div>
+              <p class="mb-0 text-muted-custom">«<?= e($testimonial['comment'] ?? '') ?>»</p>
+            </article>
+          </div>
+          <?php endforeach; ?>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq-section" id="faq">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-kicker">❓ سوالات متداول</span>
+        <h2 class="section-title display-6 mb-3">قبل از شروع، ابهام‌ها را شفاف کنیم</h2>
+        <p class="section-lead">پاسخ کوتاه و کاربردی به سوال‌هایی که معمولاً قبل از ثبت‌نام اولیه مطرح می‌شود.</p>
+      </div>
+      <div class="faq-shell reveal">
+        <div class="accordion" id="faqAccordion">
+          <?php foreach ($faqs as $index => $faq):
+              $faqId = 'faq-item-' . $index;
+          ?>
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="heading-<?= e($faqId) ?>">
+              <button class="accordion-button <?= $index === 0 ? '' : 'collapsed' ?>" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<?= e($faqId) ?>" aria-expanded="<?= $index === 0 ? 'true' : 'false' ?>" aria-controls="collapse-<?= e($faqId) ?>">
+                <span class="faq-icon">؟</span><?= e($faq['question'] ?? '') ?>
+              </button>
+            </h3>
+            <div id="collapse-<?= e($faqId) ?>" class="accordion-collapse collapse <?= $index === 0 ? 'show' : '' ?>" aria-labelledby="heading-<?= e($faqId) ?>" data-bs-parent="#faqAccordion">
+              <div class="accordion-body"><?= e($faq['answer'] ?? '') ?></div>
+            </div>
+          </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+      <div class="mini-cta mt-4 reveal text-center">
+        <h3 class="fw-black h4 mb-3">هنوز برای شروع مطمئن نیستی؟</h3>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          <a class="btn btn-register-cta rounded-pill px-4 py-3" href="register.php">🚀 ثبت نام رایگان دوره آموزشی</a>
+          <button class="btn btn-soft rounded-pill px-4 py-3" type="button" data-bs-toggle="modal" data-bs-target="#consultModal">دریافت مشاوره</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta" id="register-cta">
+    <div class="container">
+      <div class="final-cta-card reveal">
+        <div class="final-cta-inner d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-4">
+          <div class="col-lg-7">
+            <span class="badge-soft text-white bg-transparent border border-light border-opacity-25 mb-3">شروع رایگان مسیر</span>
+            <h2 class="display-6 fw-black mb-3">آماده‌ای اولین سایت حرفه‌ای خودت را با کمک هوش مصنوعی بسازی؟</h2>
+            <p class="mb-0 text-white-50">ثبت‌نام اولیه رایگان است. اطلاعاتت را وارد کن تا مشاور دوره مسیر مناسب شروع را بهت پیشنهاد بدهد.</p>
+          </div>
+          <div class="d-flex flex-column flex-sm-row gap-3">
+            <a class="btn btn-register-cta rounded-pill px-4 py-3" href="register.php">🚀 ثبت نام رایگان دوره آموزشی</a>
+            <a class="btn btn-soft rounded-pill px-4 py-3" href="#works">مشاهده نمونه‌کارها</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container d-flex flex-column flex-lg-row justify-content-between gap-3 align-items-lg-center">
+    <div>
+      <strong><?= e(setting($settings, 'footer_text', '© 3pe | دوره طراحی سایت با هوش مصنوعی')) ?></strong>
+      <div class="small mt-2">طراحی مدرن، پروژه‌محور و سازگار با موبایل.</div>
+    </div>
+    <div class="d-flex flex-wrap gap-2 align-items-center">
+      <?php if ($phone !== ''): ?><span class="badge-soft bg-transparent text-white border-light border-opacity-25">☎ <?= e($phone) ?></span><?php endif; ?>
+      <?php if ($email !== ''): ?><span class="badge-soft bg-transparent text-white border-light border-opacity-25">✉ <?= e($email) ?></span><?php endif; ?>
+      <a class="btn btn-telegram rounded-pill px-3" href="<?= e($telegram) ?>" target="_blank" rel="noopener">تلگرام</a>
+      <a class="btn btn-instagram rounded-pill px-3" href="<?= e($instagram) ?>" target="_blank" rel="noopener">اینستاگرام</a>
+    </div>
+  </div>
+</footer>
+
+<div class="modal fade work-modal" id="workModal" tabindex="-1" aria-labelledby="workModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen-lg-down modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header gap-3">
+        <div class="me-auto">
+          <h5 class="modal-title fw-black" id="workModalTitle">نمایش نمونه‌کار</h5>
+          <div class="small text-white-50" id="workModalSub"></div>
+        </div>
+        <div class="d-flex gap-2 align-items-center">
+          <a class="work-zoom-btn d-inline-grid place-items-center text-center" id="workDownload" href="#" download title="دانلود تصویر">⇩</a>
+          <button type="button" class="work-zoom-btn" id="workZoomOut" title="کوچک‌نمایی">−</button>
+          <button type="button" class="work-zoom-btn" id="workZoomReset" title="ریست">↺</button>
+          <button type="button" class="work-zoom-btn" id="workZoomIn" title="بزرگ‌نمایی">+</button>
+        </div>
+        <button type="button" class="btn-close btn-close-white ms-0" data-bs-dismiss="modal" aria-label="بستن"></button>
+      </div>
+      <div class="modal-body p-3 p-lg-4">
+        <div class="work-modal-frame" id="workModalFrame"><img id="workModalImg" class="work-modal-img" src="" alt="نمایش نمونه کار"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade consult-modal" id="consultModal" tabindex="-1" aria-labelledby="consultModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-black" id="consultModalLabel">فرم دریافت مشاوره ثبت‌نام</h5>
+        <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="بستن"></button>
+      </div>
+      <div class="modal-body p-4">
+        <form id="consultForm" class="needs-validation" novalidate action="save_consult.php" method="post">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label fw-bold" for="fullName">نام و نام خانوادگی</label>
+              <input type="text" class="form-control" id="fullName" name="fullName" required>
+              <div class="invalid-feedback">نام را وارد کنید.</div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold" for="phone">شماره تماس</label>
+              <input type="tel" class="form-control" id="phone" name="phone" pattern="^(\+98|0)?9\d{9}$" required>
+              <div class="invalid-feedback">شماره معتبر وارد کنید.</div>
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-bold" for="level">سطح فعلی</label>
+              <select class="form-select" id="level" name="level">
+                <option value="">انتخاب کنید…</option>
+                <option value="beginner">کاملاً مبتدی</option>
+                <option value="basic">آشنایی اولیه با طراحی سایت</option>
+                <option value="intermediate">در حال اجرای پروژه</option>
+                <option value="advanced">طراح سایت و دنبال رشد درآمد</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-bold" for="message">هدف یا توضیحات</label>
+              <textarea class="form-control" id="message" name="message" rows="4"></textarea>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-brand w-100 rounded-4 py-3">ثبت درخواست مشاوره</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/swiper-bundle.min.js"></script>
+<script src="assets/js/sweetalert2.all.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  const progressLine = document.getElementById('progressLine');
+  function updateProgress() {
+    if (!progressLine) return;
+    const d = document.documentElement;
+    const total = d.scrollHeight - d.clientHeight;
+    const p = total > 0 ? (d.scrollTop / total) * 100 : 0;
+    progressLine.style.width = Math.min(100, Math.max(0, p)) + '%';
+  }
+  updateProgress();
+  window.addEventListener('scroll', updateProgress, { passive: true });
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealItems = document.querySelectorAll('.reveal');
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    revealItems.forEach(el => el.classList.add('is-visible'));
+  } else {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealItems.forEach(el => observer.observe(el));
+  }
+
+  if (window.Swiper) {
+    new Swiper('.works-swiper', {
+      loop: true,
+      spaceBetween: 22,
+      grabCursor: true,
+      speed: 650,
+      autoplay: prefersReducedMotion ? false : { delay: 4500, disableOnInteraction: false },
+      navigation: { nextEl: '.works-next', prevEl: '.works-prev' },
+      pagination: { el: '.works-swiper .swiper-pagination', clickable: true },
+      breakpoints: { 0: { slidesPerView: 1.04 }, 768: { slidesPerView: 2.05 }, 1200: { slidesPerView: 3.05 } }
+    });
+    new Swiper('.testimonials-swiper', {
+      loop: true,
+      spaceBetween: 18,
+      grabCursor: true,
+      speed: 620,
+      autoplay: prefersReducedMotion ? false : { delay: 5200, disableOnInteraction: false },
+      pagination: { el: '.testimonials-swiper .swiper-pagination', clickable: true },
+      breakpoints: { 0: { slidesPerView: 1 }, 768: { slidesPerView: 2 }, 1200: { slidesPerView: 3 } }
+    });
+  }
+
+  const modalEl = document.getElementById('workModal');
+  const frame = document.getElementById('workModalFrame');
+  const img = document.getElementById('workModalImg');
+  const title = document.getElementById('workModalTitle');
+  const sub = document.getElementById('workModalSub');
+  const download = document.getElementById('workDownload');
+  if (modalEl && frame && img && window.bootstrap) {
+    const modal = new bootstrap.Modal(modalEl);
+    let zoom = 1;
+    function applyZoom() { img.style.transform = 'scale(' + zoom + ')'; }
+    function openWork(card) {
+      const src = card.dataset.img || '';
+      img.src = src;
+      if (download) download.href = src;
+      title.textContent = card.dataset.title || 'نمایش نمونه‌کار';
+      sub.textContent = card.dataset.sub || '';
+      zoom = 1;
+      applyZoom();
+      modal.show();
+    }
+    document.addEventListener('click', e => {
+      const card = e.target.closest('.work-card');
+      if (!card) return;
+      openWork(card);
+    });
+    document.addEventListener('keydown', e => {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('work-card')) {
+        e.preventDefault();
+        openWork(e.target);
+      }
+    });
+    document.getElementById('workZoomIn')?.addEventListener('click', () => { zoom = Math.min(4, zoom + .35); applyZoom(); });
+    document.getElementById('workZoomOut')?.addEventListener('click', () => { zoom = Math.max(1, zoom - .35); applyZoom(); });
+    document.getElementById('workZoomReset')?.addEventListener('click', () => { zoom = 1; applyZoom(); frame.scrollTo({ top: 0, left: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' }); });
+    frame.addEventListener('wheel', e => {
+      e.preventDefault();
+      zoom = Math.min(4, Math.max(1, zoom + (e.deltaY < 0 ? .18 : -.18)));
+      applyZoom();
+    }, { passive: false });
+    modalEl.addEventListener('hidden.bs.modal', () => { img.src = ''; });
+  }
+
+  const form = document.getElementById('consultForm');
+  const consultModalEl = document.getElementById('consultModal');
+  function showMessage(type, titleText, text) {
+    if (window.Swal) {
+      Swal.fire({ icon: type, title: titleText, text: text, confirmButtonText: 'باشه' });
+    } else {
+      alert(titleText + '\n' + text);
+    }
+  }
+  if (form) {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      if (!form.checkValidity()) {
+        event.stopPropagation();
+        form.classList.add('was-validated');
+        return;
+      }
+      const btn = form.querySelector('button[type="submit"]');
+      const old = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = 'در حال ثبت...';
+      fetch(form.action, { method: 'POST', body: new FormData(form) })
+        .then(r => r.json())
+        .then(data => {
+          if (!data || !data.ok) {
+            showMessage('error', 'خطا', data && data.message ? data.message : 'دوباره تلاش کنید.');
+            return;
+          }
+          showMessage('success', 'ثبت شد ✅', 'درخواست مشاوره شما با موفقیت ثبت شد.');
+          form.reset();
+          form.classList.remove('was-validated');
+          if (window.bootstrap && consultModalEl) (bootstrap.Modal.getInstance(consultModalEl) || new bootstrap.Modal(consultModalEl)).hide();
+        })
+        .catch(() => showMessage('error', 'مشکل ارتباط با سرور', 'دوباره تلاش کنید.'))
+        .finally(() => { btn.disabled = false; btn.innerHTML = old; });
+    });
+  }
+});
 </script>
-</body></html>
+</body>
+</html>
