@@ -253,4 +253,12 @@
   function clamp(value, min, max) {
     return Math.min(max, Math.max(min, value));
   }
+
+  function getScrollAmount(track) {
+    var firstItem = track.querySelector('.work-item');
+    if (!firstItem) return Math.max(280, Math.round(track.clientWidth * 0.85));
+    var styles = window.getComputedStyle(track);
+    var gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+    return Math.round(firstItem.getBoundingClientRect().width + gap);
+  }
 })();
