@@ -30,7 +30,6 @@ $email = setting($settings, 'email', '');
   <link href="assets/css/bootstrap.rtl.min.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
   <link rel="stylesheet" href="assets/css/landing.css">
-  <link rel="stylesheet" href="assets/css/portfolio.css">
 </head>
 <body>
 <header class="site-header">
@@ -100,8 +99,8 @@ $email = setting($settings, 'email', '');
     <div class="container">
       <div class="section-head reveal">
         <span class="section-kicker">🖼️ Showcase حرفه‌ای</span>
-        <h2 class="section-title display-6 mb-3">نمونه‌کارهای ساخته‌شده در مسیر دوره</h2>
-        <p class="section-lead">چند نمونه از خروجی‌هایی که هنرجوها می‌توانند بعد از یادگیری طراحی سایت با هوش مصنوعی بسازند.</p>
+        <h2 class="section-title display-6 mb-3">نمونه‌کارهایی که نشان می‌دهند خروجی دوره فقط تئوری نیست</h2>
+        <p class="section-lead">چند خروجی واقعی و قابل ارائه از جنس لندینگ، فروشگاه و صفحات محصول؛ با تصویر واضح، جزئیات قابل بررسی و ساختار مناسب رزومه.</p>
       </div>
       <div class="showcase-toolbar reveal">
         <div class="d-flex flex-wrap gap-2">
@@ -133,13 +132,10 @@ $email = setting($settings, 'email', '');
               <div class="work-info">
                 <h3><?= e($workTitle) ?></h3>
                 <p class="text-muted-custom mb-2"><?= e($workDesc) ?></p>
-                <div class="work-card-footer">
-                  <div class="work-tags">
-                    <span class="tag">UI مدرن</span>
-                    <span class="tag">Responsive</span>
-                    <span class="tag">Portfolio</span>
-                  </div>
-                  <span class="work-view-link" aria-hidden="true">مشاهده بزرگ</span>
+                <div class="work-tags">
+                  <span class="tag">UI مدرن</span>
+                  <span class="tag">Responsive</span>
+                  <span class="tag">Portfolio</span>
                 </div>
               </div>
             </article>
@@ -354,20 +350,27 @@ $email = setting($settings, 'email', '');
 </footer>
 
 <div class="modal fade work-modal" id="workModal" tabindex="-1" aria-labelledby="workModalTitle" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen-lg-down modal-xl modal-dialog-centered">
+  <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header gap-3">
         <div class="me-auto">
           <h5 class="modal-title fw-black" id="workModalTitle">نمایش نمونه‌کار</h5>
           <div class="small text-white-50" id="workModalSub"></div>
         </div>
-        <div class="d-flex gap-2 align-items-center">
+        <div class="work-modal-tools">
+          <span class="work-zoom-level" id="workZoomLevel">۱۰۰٪</span>
           <a class="work-zoom-btn d-inline-grid place-items-center text-center" id="workDownload" href="#" download title="دانلود تصویر">⇩</a>
+          <button type="button" class="work-zoom-btn" id="workZoomOut" title="کوچک‌نمایی">−</button>
+          <button type="button" class="work-zoom-btn work-zoom-reset" id="workZoomReset" title="نمایش کامل">نمایش کامل</button>
+          <button type="button" class="work-zoom-btn" id="workZoomIn" title="بزرگ‌نمایی">+</button>
         </div>
         <button type="button" class="btn-close btn-close-white ms-0" data-bs-dismiss="modal" aria-label="بستن"></button>
       </div>
       <div class="modal-body p-3 p-lg-4">
-        <div class="work-modal-frame" id="workModalFrame"><img id="workModalImg" class="work-modal-img" src="" alt="نمایش نمونه کار"></div>
+        <div class="work-modal-frame" id="workModalFrame">
+          <div class="work-modal-hint">برای زوم از دکمه‌های + و −، چرخ موس یا دوبار کلیک روی تصویر استفاده کنید.</div>
+          <img id="workModalImg" class="work-modal-img" src="" alt="نمایش نمونه کار">
+        </div>
       </div>
     </div>
   </div>
@@ -420,7 +423,6 @@ $email = setting($settings, 'email', '');
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/swiper-bundle.min.js"></script>
 <script src="assets/js/sweetalert2.all.min.js"></script>
-<script src="assets/js/portfolio.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   const yearEl = document.getElementById('year');
@@ -454,6 +456,16 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   if (window.Swiper) {
+    new Swiper('.works-swiper', {
+      loop: true,
+      spaceBetween: 22,
+      grabCursor: true,
+      speed: 650,
+      autoplay: prefersReducedMotion ? false : { delay: 4500, disableOnInteraction: false },
+      navigation: { nextEl: '.works-next', prevEl: '.works-prev' },
+      pagination: { el: '.works-swiper .swiper-pagination', clickable: true },
+      breakpoints: { 0: { slidesPerView: 1.02 }, 768: { slidesPerView: 1.55 }, 1200: { slidesPerView: 2.25 } }
+    });
     new Swiper('.testimonials-swiper', {
       loop: true,
       spaceBetween: 18,
@@ -465,6 +477,76 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  const modalEl = document.getElementById('workModal');
+  const frame = document.getElementById('workModalFrame');
+  const img = document.getElementById('workModalImg');
+  const title = document.getElementById('workModalTitle');
+  const sub = document.getElementById('workModalSub');
+  const download = document.getElementById('workDownload');
+  if (modalEl && frame && img && window.bootstrap) {
+    const modal = new bootstrap.Modal(modalEl);
+    const zoomLevel = document.getElementById('workZoomLevel');
+    let zoom = 1;
+    let fitWidth = 0;
+    function toPersianDigits(value) {
+      return String(value).replace(/\d/g, digit => '۰۱۲۳۴۵۶۷۸۹'[digit]);
+    }
+    function calculateFitWidth() {
+      const availableWidth = Math.max(320, frame.clientWidth - 48);
+      const naturalWidth = img.naturalWidth || availableWidth;
+      fitWidth = Math.min(naturalWidth, availableWidth);
+    }
+    function applyZoom(options = {}) {
+      if (!fitWidth) calculateFitWidth();
+      const nextWidth = Math.max(280, Math.round(fitWidth * zoom));
+      img.style.width = nextWidth + 'px';
+      img.style.maxWidth = 'none';
+      if (zoomLevel) zoomLevel.textContent = toPersianDigits(Math.round(zoom * 100)) + '٪';
+      if (options.resetScroll) frame.scrollTo({ top: 0, left: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    }
+    function setZoom(nextZoom, options = {}) {
+      zoom = Math.min(6, Math.max(.5, nextZoom));
+      applyZoom(options);
+    }
+    function openWork(card) {
+      const src = card.dataset.img || '';
+      img.removeAttribute('style');
+      img.src = src;
+      if (download) download.href = src;
+      title.textContent = card.dataset.title || 'نمایش نمونه‌کار';
+      sub.textContent = card.dataset.sub || '';
+      zoom = 1;
+      fitWidth = 0;
+      modal.show();
+      if (img.complete) window.setTimeout(() => { calculateFitWidth(); setZoom(1, { resetScroll: true }); }, 60);
+    }
+    document.addEventListener('click', e => {
+      const card = e.target.closest('.work-card');
+      if (!card) return;
+      openWork(card);
+    });
+    document.addEventListener('keydown', e => {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('work-card')) {
+        e.preventDefault();
+        openWork(e.target);
+      }
+    });
+    img.addEventListener('load', () => { calculateFitWidth(); setZoom(1, { resetScroll: true }); });
+    img.addEventListener('dblclick', () => { setZoom(zoom < 2 ? 2.5 : 1, { resetScroll: zoom >= 2 }); });
+    document.getElementById('workZoomIn')?.addEventListener('click', () => { setZoom(zoom + .5); });
+    document.getElementById('workZoomOut')?.addEventListener('click', () => { setZoom(zoom - .5); });
+    document.getElementById('workZoomReset')?.addEventListener('click', () => { setZoom(1, { resetScroll: true }); });
+    frame.addEventListener('wheel', e => {
+      e.preventDefault();
+      setZoom(zoom + (e.deltaY < 0 ? .25 : -.25));
+    }, { passive: false });
+    window.addEventListener('resize', () => {
+      if (!modalEl.classList.contains('show')) return;
+      fitWidth = 0;
+      applyZoom();
+    }, { passive: true });
+    modalEl.addEventListener('hidden.bs.modal', () => { img.src = ''; img.removeAttribute('style'); });
+  }
 
   const form = document.getElementById('consultForm');
   const consultModalEl = document.getElementById('consultModal');
