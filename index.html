@@ -1,0 +1,2121 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>3pe | دوره طراحی سایت با هوش مصنوعی</title>
+
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link href="assets/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/swiper-bundle.min.css" />
+
+  <style>
+    @font-face {
+      font-family: "Vazirmatn";
+      src: url("assets/fonts/Vazirmatn.woff2") format("woff2");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --primary: #5b21b6;
+      --primary-2: #7c3aed;
+      --secondary: #0284c7;
+      --telegram: #229ED9;
+      --instagram-1: #833AB4;
+      --instagram-2: #E1306C;
+      --instagram-3: #FCAF45;
+      --dark: #0f172a;
+      --text: #1e293b;
+      --muted: #64748b;
+      --line: rgba(15, 23, 42, .09);
+      --card: rgba(255, 255, 255, .92);
+      --shadow: 0 20px 55px rgba(15, 23, 42, .09);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 110px;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Vazirmatn", Tahoma, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(900px 450px at 85% -10%, rgba(91, 33, 182, .13), transparent 60%),
+        radial-gradient(850px 430px at 5% 8%, rgba(2, 132, 199, .11), transparent 62%),
+        linear-gradient(180deg, #f8fafc 0%, #ffffff 48%, #f8fafc 100%);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    p { line-height: 2; }
+    .fw-black { font-weight: 950; }
+    .text-muted-custom { color: var(--muted); }
+
+    .section { padding: 76px 0; }
+
+    .section-head {
+      max-width: 780px;
+      margin: 0 auto 34px;
+      text-align: center;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(91, 33, 182, .10);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 850;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      color: var(--dark);
+      font-weight: 950;
+      letter-spacing: -.5px;
+      margin-bottom: 10px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .grad-text {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .btn {
+      white-space: nowrap;
+      font-weight: 900;
+    }
+
+    .btn-brand {
+      border: 0;
+      color: #fff !important;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      box-shadow: 0 14px 32px rgba(91, 33, 182, .18);
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    }
+
+    .btn-brand:hover {
+      transform: translateY(-2px);
+      filter: brightness(.98);
+      box-shadow: 0 18px 42px rgba(91, 33, 182, .22);
+    }
+
+    .btn-soft {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .86);
+      color: var(--dark);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .btn-soft:hover {
+      transform: translateY(-2px);
+      background: #fff;
+      border-color: rgba(91, 33, 182, .22);
+    }
+
+    .btn-telegram {
+      border: 1px solid rgba(34, 158, 217, .18);
+      background: rgba(34, 158, 217, .10);
+      color: #087db3 !important;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .btn-telegram:hover {
+      transform: translateY(-2px);
+      background: rgba(34, 158, 217, .16);
+      box-shadow: 0 14px 28px rgba(34, 158, 217, .13);
+      color: #056c9b !important;
+    }
+
+    .btn-instagram {
+      border: 0;
+      color: #fff !important;
+      background: linear-gradient(135deg, var(--instagram-1), var(--instagram-2), var(--instagram-3));
+      box-shadow: 0 14px 28px rgba(225, 48, 108, .16);
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    }
+
+    .btn-instagram:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.02);
+      box-shadow: 0 18px 36px rgba(225, 48, 108, .22);
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(91, 33, 182, .10), rgba(2, 132, 199, .10));
+      border: 1px solid rgba(91, 33, 182, .08);
+      font-size: 22px;
+      flex: 0 0 auto;
+    }
+
+    .badge-soft {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .86);
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-weight: 800;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1040;
+      background: rgba(255, 255, 255, .90);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .progress-line {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 3px;
+      width: 0;
+      background: linear-gradient(90deg, var(--secondary), var(--primary));
+      border-radius: 0 0 0 12px;
+    }
+
+    .navbar { padding: 11px 0; }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: max-content;
+    }
+
+    .brand-logo {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      border-radius: 15px;
+      background: var(--dark);
+      padding: 7px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, .12);
+    }
+
+    .brand-name { line-height: 1.25; }
+
+    .brand-name strong {
+      display: block;
+      color: var(--dark);
+      font-size: 18px;
+      font-weight: 950;
+    }
+
+    .brand-name span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .nav-main {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-main .nav-link {
+      border-radius: 999px;
+      padding: 9px 13px !important;
+      color: rgba(15, 23, 42, .74);
+      font-weight: 850;
+      font-size: 14px;
+      transition: background .18s ease, color .18s ease;
+      white-space: nowrap;
+    }
+
+    .nav-main .nav-link:hover,
+    .nav-main .nav-link.active {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: #fff !important;
+    }
+
+    .menu-btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 15px;
+      width: 44px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: var(--dark);
+    }
+
+    .offcanvas { border: 0; }
+    .offcanvas-menu { background: rgba(255, 255, 255, .97); backdrop-filter: blur(16px); }
+
+    .mobile-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 15px;
+      border-radius: 16px;
+      color: var(--text);
+      font-weight: 850;
+      background: rgba(15, 23, 42, .035);
+      margin-bottom: 8px;
+    }
+
+    .mobile-link:hover {
+      background: rgba(91, 33, 182, .09);
+      color: var(--primary);
+    }
+
+    /* Social strip */
+    .social-strip {
+      position: relative;
+      z-index: 10;
+      padding: 12px 0;
+      background: linear-gradient(90deg, rgba(34, 158, 217, .10), rgba(225, 48, 108, .08));
+      border-bottom: 1px solid rgba(15, 23, 42, .06);
+    }
+
+    .social-strip-inner {
+      border-radius: 20px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, .88);
+      border: 1px solid rgba(15, 23, 42, .07);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .social-chip {
+      width: 44px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid rgba(15, 23, 42, .08);
+      box-shadow: 0 10px 22px rgba(15, 23, 42, .06);
+      font-weight: 950;
+      flex: 0 0 auto;
+    }
+
+    .social-chip.telegram { color: var(--telegram); }
+    .social-chip.instagram { color: var(--instagram-2); }
+
+    .social-strip-title {
+      font-weight: 950;
+      color: var(--dark);
+      margin-bottom: 2px;
+    }
+
+    .social-strip-sub {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 72px 0 52px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(15, 23, 42, .05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 23, 42, .05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      opacity: .38;
+      mask-image: radial-gradient(circle at 50% 25%, #000 0, transparent 72%);
+      pointer-events: none;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(91, 33, 182, .10);
+      color: var(--primary);
+      border: 1px solid rgba(91, 33, 182, .18);
+      font-weight: 900;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-weight: 950;
+      color: var(--dark);
+      letter-spacing: -1px;
+      line-height: 1.35;
+      font-size: clamp(2rem, 5vw, 3.45rem);
+      margin-bottom: 16px;
+    }
+
+    .hero-text {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 720px;
+      margin-bottom: 18px;
+    }
+
+    .hero-actions,
+    .social-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    .hero-image-card {
+      position: relative;
+      border-radius: 34px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, .92);
+      border: 1px solid rgba(15, 23, 42, .08);
+      box-shadow: 0 28px 70px rgba(15, 23, 42, .13);
+      padding: 10px;
+    }
+
+    .hero-main-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 26px;
+      object-fit: cover;
+    }
+
+    /* Cards */
+    .feature-card,
+    .work-card,
+    .syllabus-card,
+    .teacher-card,
+    .testimonial-card {
+      height: 100%;
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: 0 14px 36px rgba(15, 23, 42, .065);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+
+    .feature-card:hover,
+    .work-card:hover,
+    .syllabus-card:hover,
+    .teacher-card:hover,
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: rgba(91, 33, 182, .18);
+    }
+
+    .feature-card,
+    .syllabus-card,
+    .teacher-card,
+    .testimonial-card { padding: 24px; }
+
+    .feature-card h3,
+    .syllabus-card h3,
+    .teacher-card h3 {
+      color: var(--dark);
+      font-weight: 950;
+      font-size: 19px;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p,
+    .syllabus-card p,
+    .teacher-card p,
+    .testimonial-card p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .about-list {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      margin: 22px 0 0;
+      list-style: none;
+    }
+
+    .about-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 13px 14px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .76);
+      border: 1px solid var(--line);
+      color: var(--text);
+      line-height: 2;
+    }
+
+    /* Portfolio full-width + real zoom */
+    .works-section {
+      position: relative;
+      overflow: hidden;
+      padding-inline: 0;
+    }
+
+    .works-section::before {
+      content: "";
+      position: absolute;
+      inset: 80px 0 auto 0;
+      height: 58%;
+      background:
+        radial-gradient(900px 380px at 100% 20%, rgba(91, 33, 182, .13), transparent 65%),
+        radial-gradient(820px 360px at 0% 80%, rgba(2, 132, 199, .12), transparent 62%);
+      pointer-events: none;
+    }
+
+    .works-wide {
+      position: relative;
+      width: 100%;
+      max-width: 1680px;
+      margin-inline: auto;
+      padding-inline: clamp(12px, 3vw, 42px);
+    }
+
+    .portfolio-shell {
+      width: 100%;
+      border-radius: 34px;
+      background: rgba(255, 255, 255, .78);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: clamp(12px, 2vw, 24px);
+      overflow: hidden;
+      backdrop-filter: blur(14px);
+    }
+
+    .works-swiper {
+      width: 100%;
+      padding: 6px 4px 56px;
+      overflow: visible;
+    }
+
+    .swiper-slide { height: auto; }
+
+    .work-card {
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: zoom-in;
+      border-radius: 28px;
+      background: #fff;
+      border: 1px solid rgba(15, 23, 42, .08);
+      box-shadow: 0 16px 42px rgba(15, 23, 42, .075);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+
+    .work-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 56px rgba(15, 23, 42, .12);
+      border-color: rgba(91, 33, 182, .18);
+    }
+
+    .work-img-wrap {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(91, 33, 182, .08), rgba(2, 132, 199, .08)),
+        repeating-linear-gradient(45deg, rgba(15, 23, 42, .025) 0 8px, transparent 8px 16px),
+        #f8fafc;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .work-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, .10);
+      transition: filter .2s ease, box-shadow .2s ease;
+    }
+
+    .work-card:hover img {
+      filter: saturate(1.04) contrast(1.02);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, .14);
+    }
+
+    .work-label,
+    .work-open {
+      position: absolute;
+      z-index: 3;
+      border-radius: 999px;
+      backdrop-filter: blur(12px);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .work-label {
+      right: 18px;
+      top: 18px;
+      padding: 8px 12px;
+      background: rgba(15, 23, 42, .78);
+      color: #fff;
+    }
+
+    .work-open {
+      left: 18px;
+      bottom: 18px;
+      padding: 10px 13px;
+      background: rgba(255, 255, 255, .90);
+      color: var(--dark);
+      border: 1px solid rgba(15, 23, 42, .08);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, .10);
+    }
+
+    .work-info {
+      padding: 18px 18px 20px;
+      background: #fff;
+    }
+
+    .work-info h3 {
+      font-size: 18px;
+      font-weight: 950;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .work-info p {
+      color: var(--muted);
+      margin-bottom: 0;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .work-zoom-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .work-zoom-hint span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, .86);
+      border: 1px solid var(--line);
+    }
+
+    .modal-header,
+    .modal-footer { border-color: var(--line); }
+
+    .form-control,
+    .form-select {
+      border-radius: 16px;
+      padding: 13px 14px;
+      border: 1px solid rgba(15, 23, 42, .12);
+      box-shadow: none !important;
+    }
+
+    .form-control:focus,
+    .form-select:focus { border-color: rgba(91, 33, 182, .45); }
+
+    /* Portfolio modal: complete image + zoom + drag */
+    .work-modal .modal-dialog {
+      max-width: min(1500px, calc(100vw - 18px));
+      margin-inline: auto;
+    }
+
+    .work-modal .modal-content {
+      min-height: min(92vh, 920px);
+      background: rgba(2, 6, 23, .95);
+      color: #fff;
+      border-color: rgba(255, 255, 255, .12);
+      backdrop-filter: blur(18px);
+      border-radius: 28px;
+      overflow: hidden;
+    }
+
+    .work-modal .modal-header {
+      border-color: rgba(255, 255, 255, .12);
+      background: rgba(15, 23, 42, .68);
+      gap: 14px;
+    }
+
+    .work-modal-tools {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-inline-start: auto;
+    }
+
+    .work-zoom-btn {
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 13px;
+      background: rgba(255, 255, 255, .08);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 950;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .18s ease, transform .18s ease;
+    }
+
+    .work-zoom-btn:hover {
+      background: rgba(255, 255, 255, .14);
+      transform: translateY(-1px);
+    }
+
+    .work-modal .modal-body {
+      padding: 0;
+      background:
+        radial-gradient(circle at top right, rgba(91, 33, 182, .20), transparent 35%),
+        radial-gradient(circle at bottom left, rgba(2, 132, 199, .18), transparent 34%),
+        #020617;
+    }
+
+    .work-modal-frame {
+      width: 100%;
+      height: min(78vh, 760px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,.035) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,.035) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,.035) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,.035) 75%);
+      background-size: 28px 28px;
+      background-position: 0 0, 0 14px, 14px -14px, -14px 0;
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .work-modal-frame.is-dragging { cursor: grabbing; }
+
+    .work-modal-img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: 14px;
+      user-select: none;
+      pointer-events: none;
+      transform: translate3d(0, 0, 0) scale(1);
+      transform-origin: center center;
+      transition: transform .12s ease;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .42);
+    }
+
+    .work-modal-note {
+      padding: 10px 14px 14px;
+      text-align: center;
+      color: rgba(255,255,255,.62);
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(15, 23, 42, .58);
+      border-top: 1px solid rgba(255, 255, 255, .09);
+    }
+
+    footer {
+      padding: 30px 0;
+      background: rgba(255, 255, 255, .88);
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .footer-links a:hover { color: var(--primary); }
+
+    .sticky-cta {
+      position: fixed;
+      right: 14px;
+      left: 14px;
+      bottom: 14px;
+      z-index: 1035;
+      display: none;
+    }
+
+    .sticky-inner {
+      border-radius: 22px;
+      background: rgba(255, 255, 255, .96);
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 44px rgba(15, 23, 42, .16);
+      backdrop-filter: blur(14px);
+      padding: 10px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 991.98px) {
+      .hero { padding-top: 52px; }
+      .hero-image-card { margin-top: 18px; }
+      .sticky-cta { display: block; }
+      body { padding-bottom: 106px; }
+    }
+
+    @media (max-width: 767.98px) {
+      html { scroll-padding-top: 90px; }
+      .section { padding: 56px 0; }
+      .hero-title { letter-spacing: -.4px; }
+      .portfolio-shell { padding: 12px; }
+      .swiper-button-next,
+      .swiper-button-prev { display: none; }
+      .brand-name span { display: none; }
+      .social-strip-inner { padding: 12px; }
+      .teacher-photo { width: 82px; height: 82px; }
+      .work-modal-frame { height: 68vh; }
+    }
+
+    @media (max-width: 575.98px) {
+      .hero-actions .btn,
+      .social-actions .btn,
+      .cta-box .btn,
+      .sticky-inner .btn {
+        font-size: 13px;
+        padding: 11px 14px !important;
+        flex: 1 1 calc(50% - 8px);
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+      }
+
+      .hero-image-card {
+        border-radius: 24px;
+        padding: 7px;
+      }
+
+      .hero-main-image { border-radius: 18px; }
+      .work-img-wrap { aspect-ratio: 4 / 3; padding: 10px; }
+      .work-open { display: none; }
+    }
+
+    @media (max-width: 390px) {
+      .hero-actions .btn,
+      .social-actions .btn,
+      .cta-box .btn,
+      .sticky-inner .btn {
+        flex: 0 0 100%;
+        width: 100%;
+      }
+    }
+
+
+    @media (max-width: 991.98px) {
+      .work-modal .modal-content { min-height: 100vh; border-radius: 0; }
+      .work-modal-frame { height: calc(100vh - 138px); }
+      .work-modal .modal-header { align-items: flex-start; }
+      .work-modal-tools { order: 3; width: 100%; justify-content: center; margin-top: 8px; }
+    }
+
+    @media (max-width: 767.98px) {
+      .works-wide { padding-inline: 10px; }
+      .portfolio-shell { border-radius: 24px; padding: 10px; }
+      .work-img-wrap { aspect-ratio: 4 / 3; padding: 10px; }
+      .work-card { border-radius: 22px; }
+      .work-card img { border-radius: 16px; }
+      .work-open { left: 12px; bottom: 12px; padding: 9px 11px; }
+      .work-label { right: 12px; top: 12px; }
+      .work-info { padding: 15px; }
+      .work-zoom-hint { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#topNav" data-bs-offset="110" tabindex="0">
+
+  <!-- Header -->
+  <header class="site-header" id="topNav">
+    <div class="progress-line" id="progressLine"></div>
+
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a href="#" class="brand">
+          <img src="assets/logo.png" class="brand-logo" alt="لوگوی 3pe">
+          <span class="brand-name">
+            <strong><span class="grad-text">3pe</span></strong>
+            <span>AI Web Design Course</span>
+          </span>
+        </a>
+
+        <div class="d-none d-lg-flex align-items-center gap-3 ms-auto">
+          <ul class="navbar-nav nav-main">
+            <li class="nav-item"><a class="nav-link" href="#about">دوره</a></li>
+            <li class="nav-item"><a class="nav-link" href="#works">نمونه‌کارها</a></li>
+            <li class="nav-item"><a class="nav-link" href="#syllabus">سرفصل‌ها</a></li>
+            <li class="nav-item"><a class="nav-link" href="#gifts">هدایا</a></li>
+            <li class="nav-item"><a class="nav-link" href="#teachers">اساتید</a></li>
+            <li class="nav-item"><a class="nav-link" href="#testimonials">نظرات</a></li>
+            <li class="nav-item"><a class="nav-link" href="#faq">سوالات</a></li>
+          </ul>
+
+          <a class="btn btn-telegram rounded-pill px-4 py-2" href="https://t.me/USERNAME" target="_blank" rel="noopener">
+            کانال تلگرام
+          </a>
+
+          <a class="btn btn-instagram rounded-pill px-4 py-2" href="https://instagram.com/USERNAME" target="_blank" rel="noopener">
+            اینستاگرام
+          </a>
+
+          <button class="btn btn-brand rounded-pill px-4 py-2" data-bs-toggle="modal" data-bs-target="#consultModal">
+            مشاوره رایگان
+          </button>
+        </div>
+
+        <button class="menu-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-label="باز کردن منو">
+          ☰
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="offcanvas offcanvas-end offcanvas-menu" tabindex="-1" id="mobileMenu">
+    <div class="offcanvas-header">
+      <div class="d-flex align-items-center gap-2">
+        <img src="assets/logo.png" class="brand-logo" style="width:40px;height:40px;border-radius:14px;" alt="لوگو">
+        <div>
+          <div class="fw-black text-dark">3pe</div>
+          <div class="small text-muted-custom">دوره طراحی سایت با AI</div>
+        </div>
+      </div>
+      <button type="button" class="btn-close ms-0" data-bs-dismiss="offcanvas" aria-label="بستن"></button>
+    </div>
+
+    <div class="offcanvas-body">
+      <button class="btn btn-brand w-100 rounded-4 py-3 mb-3" data-bs-toggle="modal" data-bs-target="#consultModal" data-bs-dismiss="offcanvas">
+        دریافت مشاوره رایگان
+      </button>
+
+      <div class="row g-2 mb-3">
+        <div class="col-6">
+          <a class="btn btn-telegram w-100 rounded-4 py-3" href="https://t.me/USERNAME" target="_blank" rel="noopener">
+            تلگرام
+          </a>
+        </div>
+        <div class="col-6">
+          <a class="btn btn-instagram w-100 rounded-4 py-3" href="https://instagram.com/USERNAME" target="_blank" rel="noopener">
+            اینستاگرام
+          </a>
+        </div>
+      </div>
+
+      <a class="mobile-link" href="#about" data-bs-dismiss="offcanvas">درباره دوره <span>←</span></a>
+      <a class="mobile-link" href="#works" data-bs-dismiss="offcanvas">نمونه‌کارها <span>←</span></a>
+      <a class="mobile-link" href="#syllabus" data-bs-dismiss="offcanvas">سرفصل‌ها <span>←</span></a>
+      <a class="mobile-link" href="#gifts" data-bs-dismiss="offcanvas">هدایای دوره <span>←</span></a>
+      <a class="mobile-link" href="#teachers" data-bs-dismiss="offcanvas">اساتید <span>←</span></a>
+      <a class="mobile-link" href="#testimonials" data-bs-dismiss="offcanvas">نظرات دانشجویان <span>←</span></a>
+      <a class="mobile-link" href="#faq" data-bs-dismiss="offcanvas">سوالات متداول <span>←</span></a>
+    </div>
+  </div>
+
+  <!-- Social Strip -->
+ 
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6 reveal">
+          <div class="hero-badge">
+            <span>✨</span>
+            دوره پروژه‌محور طراحی سایت با هوش مصنوعی
+          </div>
+
+          <h1 class="hero-title">
+            طراحی سایت حرفه‌ای با کمک <span class="grad-text">هوش مصنوعی</span>
+          </h1>
+
+          <p class="hero-text">
+            سریع‌تر، تمیزتر و پول‌سازتر طراحی سایت یاد بگیر. از ایده تا اجرای واقعی، یاد می‌گیری چطور با AI طراحی، کدنویسی، دیباگ، تولید محتوا و آماده‌سازی سایت برای انتشار را اصولی انجام بدی.
+          </p>
+
+      
+          <div class="hero-pills">
+            <span class="badge-soft">✅ پروژه‌محور</span>
+            <span class="badge-soft">✅ مناسب شروع بازار کار</span>
+            <span class="badge-soft">✅ همراه با تمرین واقعی</span>
+          </div>
+        </div>
+
+        <div class="col-lg-6 reveal">
+          <div class="hero-image-card">
+            <img src="assets/images/ai-hero.png" alt="مسیر ساخت سایت با هوش مصنوعی" class="hero-main-image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Works -->
+  <section id="works" class="section works-section">
+    <div class="works-wide">
+      <div class="section-head reveal">
+        <div class="section-kicker">🖼️ نمونه‌کارها</div>
+        <h2 class="section-title h1">نمونه‌کارهای دانشجویان</h2>
+        <p class="section-sub">
+          این بخش تمام‌عرض بازطراحی شده؛ تصاویر داخل کارت‌ها کراپ نمی‌شوند و با کلیک، در مودال بزرگ با زوم واقعی نمایش داده می‌شوند.
+        </p>
+      </div>
+
+      <div class="portfolio-shell reveal">
+        <div class="swiper works-swiper">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <article class="work-card" data-title="صفحه تک محصول" data-sub="طراحی صفحه محصول با ساختار فروشگاهی و ریسپانسیو" data-img="assets/works/work-1.jpg">
+                <div class="work-img-wrap">
+                  <span class="work-label">نمونه ۱</span>
+                  <span class="work-open">کلیک برای زوم</span>
+                  <img src="assets/works/work-1.jpg" alt="صفحه تک محصول" loading="lazy">
+                </div>
+                <div class="work-info">
+                  <h3>صفحه تک محصول</h3>
+                  <p>نمایش کامل تصویر بدون برش، مناسب بررسی جزئیات طراحی.</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="swiper-slide">
+              <article class="work-card" data-title="لندینگ دوره آموزشی" data-sub="صفحه فرود برای معرفی دوره و دریافت لید" data-img="assets/works/work-2.jpg">
+                <div class="work-img-wrap">
+                  <span class="work-label">نمونه ۲</span>
+                  <span class="work-open">کلیک برای زوم</span>
+                  <img src="assets/works/work-2.jpg" alt="لندینگ دوره آموزشی" loading="lazy">
+                </div>
+                <div class="work-info">
+                  <h3>لندینگ دوره آموزشی</h3>
+                  <p>نمایش ریسپانسیو و واضح برای صفحه فرود آموزشی.</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="swiper-slide">
+              <article class="work-card" data-title="سایت فروشگاهی" data-sub="صفحه محصولات، معرفی کالا و ساختار خرید ساده" data-img="assets/works/work-3.jpg">
+                <div class="work-img-wrap">
+                  <span class="work-label">نمونه ۳</span>
+                  <span class="work-open">کلیک برای زوم</span>
+                  <img src="assets/works/work-3.jpg" alt="سایت فروشگاهی" loading="lazy">
+                </div>
+                <div class="work-info">
+                  <h3>سایت فروشگاهی</h3>
+                  <p>کارت محصولات، مسیر خرید و جزئیات UI با نمایش کامل.</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="swiper-slide">
+              <article class="work-card" data-title="سایت آموزشی" data-sub="ساختار مناسب برای آموزش، خدمات و ثبت‌نام" data-img="assets/works/work-4.jpg">
+                <div class="work-img-wrap">
+                  <span class="work-label">نمونه ۴</span>
+                  <span class="work-open">کلیک برای زوم</span>
+                  <img src="assets/works/work-4.jpg" alt="سایت آموزشی" loading="lazy">
+                </div>
+                <div class="work-info">
+                  <h3>سایت آموزشی</h3>
+                  <p>چیدمان مرتب برای معرفی خدمات آموزشی و ثبت‌نام.</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="swiper-slide">
+              <article class="work-card" data-title="صفحه درباره ما" data-sub="معرفی برند، تیم، ارزش‌ها و اعتمادسازی" data-img="assets/works/work-5.jpg">
+                <div class="work-img-wrap">
+                  <span class="work-label">نمونه ۵</span>
+                  <span class="work-open">کلیک برای زوم</span>
+                  <img src="assets/works/work-5.jpg" alt="صفحه درباره ما" loading="lazy">
+                </div>
+                <div class="work-info">
+                  <h3>صفحه درباره ما</h3>
+                  <p>مناسب برندینگ، معرفی تیم و اعتمادسازی.</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="swiper-slide">
+              <article class="work-card" data-title="وبسایت فروشگاهی" data-sub="کامپوننت‌های فروشگاهی، کارت محصول و صفحه معرفی" data-img="assets/works/work-6.jpg">
+                <div class="work-img-wrap">
+                  <span class="work-label">نمونه ۶</span>
+                  <span class="work-open">کلیک برای زوم</span>
+                  <img src="assets/works/work-6.jpg" alt="وبسایت فروشگاهی" loading="lazy">
+                </div>
+                <div class="work-info">
+                  <h3>وبسایت فروشگاهی</h3>
+                  <p>نمایش تمیز برای ارائه محصول و دریافت سفارش.</p>
+                </div>
+              </article>
+            </div>
+
+          </div>
+
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next" aria-label="بعدی"></div>
+          <div class="swiper-button-prev" aria-label="قبلی"></div>
+        </div>
+
+        <div class="work-zoom-hint">
+          <span>🔍 کلیک روی کارت برای نمایش بزرگ</span>
+          <span>🖱️ داخل مودال با اسکرول موس زوم کن</span>
+          <span>✋ بعد از زوم، تصویر را بکش و جابه‌جا کن</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6 reveal">
+          <div class="section-kicker">🎯 درباره دوره</div>
+          <h2 class="section-title h1">طراحی سایت و درآمدزایی</h2>
+          <p class="section-sub">
+            هدف فقط یاد گرفتن ابزار نیست؛ هدف اینه که بتونی با کمک هوش مصنوعی، یک سایت قابل ارائه بسازی، خطاهاش رو حل کنی، منتشرش کنی و ازش برای نمونه‌کار یا پروژه واقعی استفاده کنی.
+          </p>
+
+          <ul class="about-list">
+            <li><span>✅</span><div><strong>از صفر تا انتشار:</strong> ایده، طراحی، کدنویسی، دیباگ و دیپلوی</div></li>
+            <li><span>✅</span><div><strong>پرامپت‌نویسی کاربردی:</strong> برای UI، کد، محتوا، سئو و رفع خطا</div></li>
+            <li><span>✅</span><div><strong>تمرین روی پروژه واقعی:</strong> لندینگ، فروشگاه ساده، دیتابیس و فرم‌ها</div></li>
+            <li><span>✅</span><div><strong>ورود به بازار کار:</strong> نمونه‌کار، رزومه، قیمت‌گذاری و گرفتن پروژه</div></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-6 reveal">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="feature-card">
+                <div class="icon mb-3">⚡</div>
+                <h3>سرعت بیشتر</h3>
+                <p>به جای آزمون‌وخطای طولانی، یاد می‌گیری چطور خروجی درست و سریع از AI بگیری.</p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="feature-card">
+                <div class="icon mb-3">🎨</div>
+                <h3>طراحی تمیزتر</h3>
+                <p>ساختار UI، فاصله‌ها، رنگ‌بندی و ریسپانسیو بودن را اصولی جلو می‌بری.</p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="feature-card">
+                <div class="icon mb-3">🧠</div>
+                <h3>استفاده درست از AI</h3>
+                <p>یاد می‌گیری چه چیزی بپرسی، چطور خروجی را اصلاح کنی و چطور بررسی کنی.</p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="feature-card">
+                <div class="icon mb-3">💼</div>
+                <h3>قابل ارائه به مشتری</h3>
+                <p>خروجی دوره فقط تمرین نیست؛ می‌تونه پایه نمونه‌کار یا پروژه واقعی باشه.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-box mt-4 reveal">
+        <div class="row align-items-center g-3">
+          <div class="col-lg-8">
+            <h3 class="fw-black mb-2">اول با فضای دوره آشنا شو</h3>
+            <p class="text-muted-custom mb-0">در تلگرام و اینستاگرام، اطلاعیه‌ها، محتوای آموزشی کوتاه، نمونه‌کارها و شرایط ثبت‌نام منتشر می‌شود.</p>
+          </div>
+          <div class="col-lg-4">
+            <div class="social-actions justify-content-lg-start justify-content-center">
+              <a class="btn btn-telegram rounded-pill px-4 py-3" href="https://t.me/USERNAME" target="_blank" rel="noopener">تلگرام</a>
+              <a class="btn btn-instagram rounded-pill px-4 py-3" href="https://instagram.com/USERNAME" target="_blank" rel="noopener">اینستاگرام</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Syllabus -->
+  <section id="syllabus" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-kicker">📚 سرفصل‌ها</div>
+        <h2 class="section-title h1">مسیر آموزشی مرحله‌به‌مرحله</h2>
+        <p class="section-sub">از مبانی تا انتشار پروژه و آماده شدن برای گرفتن پروژه واقعی.</p>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-lg-6 reveal">
+          <div class="syllabus-card">
+            <div class="d-flex gap-3 align-items-start">
+              <div class="step-num">1</div>
+              <div>
+                <h3>مقدمات و پایه</h3>
+                <p>آشنایی با مسیر دوره، ابزارهای AI، اصول پرامپت‌نویسی، ساختار پروژه و خروجی استاندارد.</p>
+                <div class="tag-list">
+                  <span class="tag">Prompt</span>
+                  <span class="tag">HTML/CSS</span>
+                  <span class="tag">Bootstrap</span>
+                  <span class="tag">Workflow</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 reveal">
+          <div class="syllabus-card">
+            <div class="d-flex gap-3 align-items-start">
+              <div class="step-num">2</div>
+              <div>
+                <h3>ساخت صفحات با هوش مصنوعی</h3>
+                <p>ساخت لندینگ و صفحات داخلی با کمک AI، طراحی UI، تولید محتوا و چیدمان ریسپانسیو.</p>
+                <div class="tag-list">
+                  <span class="tag">UI/UX</span>
+                  <span class="tag">Responsive</span>
+                  <span class="tag">Components</span>
+                  <span class="tag">Content</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 reveal">
+          <div class="syllabus-card">
+            <div class="d-flex gap-3 align-items-start">
+              <div class="step-num">3</div>
+              <div>
+                <h3>ساخت سایت فروشگاهی ساده</h3>
+                <p>طراحی لیست محصولات، صفحه محصول، فرم سفارش، سبد خرید ساده و مسیر کاربر.</p>
+                <div class="tag-list">
+                  <span class="tag">Product Page</span>
+                  <span class="tag">Cart Basic</span>
+                  <span class="tag">Order Form</span>
+                  <span class="tag">UX Flow</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 reveal">
+          <div class="syllabus-card">
+            <div class="d-flex gap-3 align-items-start">
+              <div class="step-num">4</div>
+              <div>
+                <h3>کار با دیتابیس</h3>
+                <p>طراحی جدول‌ها، ارتباط‌ها، ذخیره اطلاعات فرم‌ها و انجام عملیات CRUD به شکل ساده و اصولی.</p>
+                <div class="tag-list">
+                  <span class="tag">Database</span>
+                  <span class="tag">CRUD</span>
+                  <span class="tag">Validation</span>
+                  <span class="tag">Forms</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 reveal">
+          <div class="syllabus-card">
+            <div class="d-flex gap-3 align-items-start">
+              <div class="step-num">5</div>
+              <div>
+                <h3>انتشار روی هاست و دامنه</h3>
+                <p>آماده‌سازی پروژه، اتصال دامنه، تنظیم DNS، فعال‌سازی SSL و رفع خطاهای بعد از انتشار.</p>
+                <div class="tag-list">
+                  <span class="tag">Deploy</span>
+                  <span class="tag">Domain</span>
+                  <span class="tag">DNS</span>
+                  <span class="tag">SSL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 reveal">
+          <div class="syllabus-card">
+            <div class="d-flex gap-3 align-items-start">
+              <div class="step-num">6</div>
+              <div>
+                <h3>رزومه و پورتفولیو</h3>
+                <p>آماده‌سازی نمونه‌کارها، رزومه، معرفی مهارت‌ها و ساخت مسیر مناسب برای ارائه به کارفرما یا مشتری.</p>
+                <div class="tag-list">
+                  <span class="tag">Resume</span>
+                  <span class="tag">Portfolio</span>
+                  <span class="tag">Showcase</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 reveal">
+          <div class="syllabus-card">
+            <div class="d-flex gap-3 align-items-start">
+              <div class="step-num">7</div>
+              <div>
+                <h3>گرفتن پروژه و شروع درآمدزایی</h3>
+                <p>پیدا کردن مشتری، نوشتن پیشنهاد، قیمت‌گذاری، قرارداد، دریافت پیش‌پرداخت و مدیریت تحویل پروژه.</p>
+                <div class="tag-list">
+                  <span class="tag">Pricing</span>
+                  <span class="tag">Proposal</span>
+                  <span class="tag">Contract</span>
+                  <span class="tag">Client Handling</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-box mt-4 reveal">
+        <div class="row align-items-center g-3">
+          <div class="col-lg-8">
+            <h3 class="fw-black mb-2">خروجی نهایی دوره چیست؟</h3>
+            <p class="text-muted-custom mb-0">
+              صفحات حرفه‌ای، فروشگاه ساده، اتصال به دیتابیس، انتشار روی هاست و یک مسیر عملی برای ساخت نمونه‌کار و گرفتن پروژه.
+            </p>
+          </div>
+          <div class="col-lg-4 text-lg-start text-center">
+            <button class="btn btn-brand rounded-pill px-4 py-3" data-bs-toggle="modal" data-bs-target="#consultModal">
+              مشاوره و ثبت‌نام
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gifts -->
+  <section id="gifts" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-kicker">🎁 هدایا</div>
+        <h2 class="section-title h1">هدایای دوره</h2>
+        <p class="section-sub">ابزارهایی که باعث می‌شن مسیر یادگیری و اجرای پروژه سریع‌تر و تمیزتر بشه.</p>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="feature-card">
+            <div class="icon mb-3">📝</div>
+            <h3>پک پرامپت آماده</h3>
+            <p>پرامپت‌های تست‌شده برای طراحی، کدنویسی، دیباگ، محتوا و سئو.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="feature-card">
+            <div class="icon mb-3">🧱</div>
+            <h3>قالب‌های شروع سریع</h3>
+            <p>چند ساختار آماده برای شروع سریع‌تر صفحات و لندینگ‌ها.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="feature-card">
+            <div class="icon mb-3">✅</div>
+            <h3>چک‌لیست تحویل</h3>
+            <p>لیست بررسی نهایی قبل از تحویل پروژه به مشتری یا انتشار.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="feature-card">
+            <div class="icon mb-3">💼</div>
+            <h3>راهنمای بازار کار</h3>
+            <p>راهنمای رزومه، قیمت‌گذاری، نمونه‌کار و ارائه به مشتری.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-box mt-4 reveal">
+        <div class="row align-items-center g-3">
+          <div class="col-lg-8">
+            <h3 class="fw-black mb-2">هدایا و اطلاعیه‌ها را دنبال کن</h3>
+            <p class="text-muted-custom mb-0">برای اینکه چیزی را از دست ندی، تلگرام و اینستاگرام 3pe را دنبال کن.</p>
+          </div>
+          <div class="col-lg-4">
+            <div class="social-actions justify-content-lg-start justify-content-center">
+              <a class="btn btn-telegram rounded-pill px-4 py-3" href="https://t.me/USERNAME" target="_blank" rel="noopener">کانال تلگرام</a>
+              <a class="btn btn-instagram rounded-pill px-4 py-3" href="https://instagram.com/USERNAME" target="_blank" rel="noopener">اینستاگرام</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teachers -->
+  <section id="teachers" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-kicker">👨‍🏫 اساتید</div>
+        <h2 class="section-title h1">درباره اساتید</h2>
+        <p class="section-sub">ترکیب تجربه مدیریت پروژه، آموزش، طراحی سایت و اجرای پروژه با هوش مصنوعی.</p>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-lg-6 reveal">
+          <div class="teacher-card">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="teacher-photo" aria-hidden="true">
+                <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="teacherBg1" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#7c3aed" />
+                      <stop offset="100%" stop-color="#0284c7" />
+                    </linearGradient>
+                  </defs>
+                  <rect width="120" height="120" fill="url(#teacherBg1)" />
+                  <circle cx="60" cy="42" r="19" fill="#f8fafc" />
+                  <path d="M28 102c4-20 18-33 32-33s28 13 32 33" fill="#f8fafc" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="mb-1">علی عباسی</h3>
+                <div class="text-muted-custom fw-bold">ارشد مهندسی نرم‌افزار</div>
+              </div>
+            </div>
+
+            <p>مشاوره و آموزش طراحی سایت، بیش از ۱۱۰ پروژه، ۲۰ سال سابقه کاری و تجربه مدیریت در چند شرکت معتبر.</p>
+
+            <div class="tag-list">
+              <span class="tag">+110 پروژه</span>
+              <span class="tag">۲۰ سال سابقه</span>
+              <span class="tag">مدیریت پروژه</span>
+              <span class="tag">آموزش و مشاوره</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 reveal">
+          <div class="teacher-card">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="teacher-photo" aria-hidden="true">
+                <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="teacherBg2" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#0284c7" />
+                      <stop offset="100%" stop-color="#7c3aed" />
+                    </linearGradient>
+                  </defs>
+                  <rect width="120" height="120" fill="url(#teacherBg2)" />
+                  <circle cx="60" cy="42" r="19" fill="#f8fafc" />
+                  <path d="M28 102c4-20 18-33 32-33s28 13 32 33" fill="#f8fafc" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="mb-1">علیرضا سجادی</h3>
+                <div class="text-muted-custom fw-bold">کارشناسی کامپیوتر</div>
+              </div>
+            </div>
+
+            <p>فعال در طراحی سایت با هوش مصنوعی، بیش از ۵۰ پروژه و ۱۰ سال سابقه در اجرای پروژه‌های وب و طراحی سایت.</p>
+
+            <div class="tag-list">
+              <span class="tag">+50 پروژه</span>
+              <span class="tag">۱۰ سال سابقه</span>
+              <span class="tag">AI Web</span>
+              <span class="tag">اجرا و پیاده‌سازی</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-box mt-4 reveal">
+        <div class="row align-items-center g-3">
+          <div class="col-lg-8">
+            <h3 class="fw-black mb-2">برای انتخاب مسیر یادگیری مطمئن نیستی؟</h3>
+            <p class="text-muted-custom mb-0">مشاوره رایگان بگیر یا اول تلگرام و اینستاگرام را دنبال کن و فضای دوره را ببین.</p>
+          </div>
+          <div class="col-lg-4">
+            <div class="social-actions justify-content-lg-start justify-content-center">
+              <button class="btn btn-brand rounded-pill px-4 py-3" data-bs-toggle="modal" data-bs-target="#consultModal">
+                دریافت مشاوره
+              </button>
+              <a class="btn btn-telegram rounded-pill px-4 py-3" href="https://t.me/USERNAME" target="_blank" rel="noopener">تلگرام</a>
+              <a class="btn btn-instagram rounded-pill px-4 py-3" href="https://instagram.com/USERNAME" target="_blank" rel="noopener">اینستاگرام</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-kicker">⭐ نظرات</div>
+        <h2 class="section-title h1">نظرات دانشجویان</h2>
+        <p class="section-sub">تجربه کسانی که با مسیر پروژه‌محور دوره به خروجی واقعی رسیدن.</p>
+      </div>
+
+      <div class="portfolio-shell reveal">
+        <div class="swiper testimonials-swiper">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="d-flex align-items-start gap-3 mb-3">
+                  <div class="student-avatar">م</div>
+                  <div>
+                    <div class="fw-black">مریم — فریلنسر</div>
+                    <div class="small text-muted-custom">از صفر شروع کردم</div>
+                    <div class="stars">★★★★★</div>
+                  </div>
+                </div>
+                <p>روال پروژه‌محور باعث شد واقعاً یک لندینگ تمیز بسازم. پرامپت‌ها و چک‌لیست‌ها خیلی کمک کرد.</p>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="d-flex align-items-start gap-3 mb-3">
+                  <div class="student-avatar">ع</div>
+                  <div>
+                    <div class="fw-black">علی — طراح سایت</div>
+                    <div class="small text-muted-custom">سرعتم چند برابر شد</div>
+                    <div class="stars">★★★★☆</div>
+                  </div>
+                </div>
+                <p>مهم‌ترین بخش برای من دیباگ با AI بود. یاد گرفتم چطور درست سؤال بپرسم و خروجی بهتر بگیرم.</p>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="d-flex align-items-start gap-3 mb-3">
+                  <div class="student-avatar">س</div>
+                  <div>
+                    <div class="fw-black">سمیه — صاحب کسب‌وکار</div>
+                    <div class="small text-muted-custom">برای سایت خودم عالی بود</div>
+                    <div class="stars">★★★★★</div>
+                  </div>
+                </div>
+                <p>هم طراحی و هم اجرا رو با هم یاد گرفتم. خروجی‌اش یک سایت چندصفحه‌ای قابل ارائه شد.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next" aria-label="بعدی"></div>
+          <div class="swiper-button-prev" aria-label="قبلی"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-kicker">❓ سوالات متداول</div>
+        <h2 class="section-title h1">قبل از ثبت‌نام</h2>
+        <p class="section-sub">چند سوال پرتکرار درباره مسیر دوره و خروجی نهایی.</p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-9 reveal">
+          <div class="accordion" id="faqAccordion">
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faqH1">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqC1">
+                  آیا برای شروع باید برنامه‌نویسی بلد باشم؟
+                </button>
+              </h2>
+              <div id="faqC1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  نه، مسیر از پایه شروع می‌شود؛ اما اگر با HTML، CSS یا ابزارهای طراحی آشنا باشی، سریع‌تر جلو می‌ری.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faqH2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqC2">
+                  خروجی دوره قابل استفاده برای نمونه‌کار هست؟
+                </button>
+              </h2>
+              <div id="faqC2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  بله، تمرکز دوره روی ساخت خروجی قابل ارائه است تا بتوانی از پروژه‌ها برای نمونه‌کار، رزومه یا شروع گرفتن پروژه استفاده کنی.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faqH3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqC3">
+                  آیا فقط با هوش مصنوعی کار می‌کنیم؟
+                </button>
+              </h2>
+              <div id="faqC3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  هوش مصنوعی کمک‌کننده اصلی است، ولی مسیر طوری طراحی شده که ساختار پروژه، بررسی خروجی، دیباگ و تحویل استاندارد را هم یاد بگیری.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faqH4">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqC4">
+                  بعد از ثبت فرم چه اتفاقی می‌افته؟
+                </button>
+              </h2>
+              <div id="faqC4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  مشاور دوره با شما تماس می‌گیره، سطح فعلی و هدفتون رو بررسی می‌کنه و مسیر مناسب رو پیشنهاد می‌ده.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="cta-box mt-4">
+            <div class="row align-items-center g-3">
+              <div class="col-lg-7">
+                <h3 class="fw-black mb-2">هنوز سوال داری؟</h3>
+                <p class="text-muted-custom mb-0">فرم مشاوره را پر کن یا تلگرام و اینستاگرام را دنبال کن تا اطلاعات کامل‌تری دریافت کنی.</p>
+              </div>
+              <div class="col-lg-5">
+                <div class="social-actions justify-content-lg-start justify-content-center">
+                  <button class="btn btn-brand rounded-pill px-4 py-3" data-bs-toggle="modal" data-bs-target="#consultModal">
+                    ثبت درخواست مشاوره
+                  </button>
+                  <a class="btn btn-telegram rounded-pill px-4 py-3" href="https://t.me/USERNAME" target="_blank" rel="noopener">تلگرام</a>
+                  <a class="btn btn-instagram rounded-pill px-4 py-3" href="https://instagram.com/USERNAME" target="_blank" rel="noopener">اینستاگرام</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center gap-3">
+        <div class="d-flex align-items-center gap-2">
+          <img src="assets/logo.png" alt="لوگو" class="brand-logo" style="width:36px;height:36px;border-radius:13px;padding:5px;">
+          <span>© <span id="year"></span> — 3pe | دوره طراحی سایت با هوش مصنوعی</span>
+        </div>
+
+        <div class="footer-links">
+          <a href="#about">دوره</a>
+          <a href="#works">نمونه‌کارها</a>
+          <a href="#syllabus">سرفصل‌ها</a>
+          <a href="#faq">سوالات</a>
+          <a href="https://t.me/USERNAME" target="_blank" rel="noopener">تلگرام</a>
+          <a href="https://instagram.com/USERNAME" target="_blank" rel="noopener">اینستاگرام</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Work Modal -->
+  <div class="modal fade work-modal" id="workModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-lg-down">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title fw-black mb-1" id="workModalTitle">نمایش نمونه‌کار</h5>
+            <div class="small text-white-50" id="workModalSub"></div>
+          </div>
+
+          <div class="work-modal-tools" aria-label="ابزار بزرگ‌نمایی نمونه‌کار">
+            <button type="button" class="work-zoom-btn" id="workZoomOut" aria-label="کوچک کردن">−</button>
+            <button type="button" class="work-zoom-btn" id="workZoomReset" aria-label="بازگشت به حالت اصلی">↺</button>
+            <button type="button" class="work-zoom-btn" id="workZoomIn" aria-label="بزرگ کردن">+</button>
+          </div>
+
+          <button type="button" class="btn-close btn-close-white ms-0" data-bs-dismiss="modal" aria-label="بستن"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="work-modal-frame" id="workModalFrame">
+            <img id="workModalImg" class="work-modal-img" src="" alt="نمایش نمونه کار">
+          </div>
+          <div class="work-modal-note">برای زوم از دکمه‌ها یا اسکرول موس استفاده کن؛ بعد از زوم می‌تونی تصویر را بگیری و جابه‌جا کنی.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consult Modal -->
+  <div class="modal fade" id="consultModal" tabindex="-1" aria-labelledby="consultModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-black" id="consultModalLabel">فرم دریافت مشاوره ثبت‌نام</h5>
+          <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="بستن"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="d-flex align-items-start gap-3 mb-4">
+            <div class="icon">☎️</div>
+            <div>
+              <div class="fw-black mb-1">اطلاعاتت را وارد کن تا مشاور دوره باهات تماس بگیره</div>
+              <div class="text-muted-custom small">بعد از ثبت، درخواستت ذخیره می‌شود و برای پیگیری باهات تماس می‌گیریم.</div>
+            </div>
+          </div>
+
+          <form id="consultForm" class="needs-validation" novalidate action="save_consult.php" method="post">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-bold" for="fullName">نام و نام خانوادگی</label>
+                <input type="text" class="form-control" id="fullName" name="fullName" placeholder="مثلاً علی رضایی" required>
+                <div class="invalid-feedback">لطفاً نام و نام خانوادگی را وارد کنید.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-bold" for="phone">شماره تماس</label>
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="مثلاً 09123456789" pattern="^(\+98|0)?9\d{9}$" required>
+                <div class="form-text text-muted-custom">فرمت پیشنهادی: 09xxxxxxxxx</div>
+                <div class="invalid-feedback">شماره تماس معتبر وارد کنید.</div>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label fw-bold" for="level">سطح فعلی</label>
+                <select class="form-select" id="level" name="level">
+                  <option value="" selected>انتخاب کنید…</option>
+                  <option value="beginner">کاملاً مبتدی</option>
+                  <option value="basic">آشنایی اولیه با طراحی سایت</option>
+                  <option value="intermediate">در حال اجرای پروژه</option>
+                  <option value="advanced">طراح سایت و دنبال رشد درآمد</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label fw-bold" for="message">هدف یا توضیحات</label>
+                <textarea class="form-control" id="message" name="message" rows="4" placeholder="مثلاً می‌خوام پروژه بگیرم، سایت خودم رو بسازم یا وارد بازار کار بشم…"></textarea>
+              </div>
+
+              <div class="col-12">
+                <button type="submit" class="btn btn-brand w-100 rounded-4 py-3">
+                  ثبت درخواست مشاوره
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer justify-content-between">
+          <span class="small text-muted-custom">اطلاعات شما فقط برای پیگیری مشاوره استفاده می‌شود.</span>
+          <button type="button" class="btn btn-soft rounded-pill px-4" data-bs-dismiss="modal">بستن</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky CTA Mobile -->
+  <div class="sticky-cta">
+    <div class="sticky-inner">
+      <button class="btn btn-brand rounded-pill px-3 py-3" data-bs-toggle="modal" data-bs-target="#consultModal">
+        مشاوره رایگان
+      </button>
+      <a class="btn btn-telegram rounded-pill px-3 py-3" href="https://t.me/USERNAME" target="_blank" rel="noopener">
+        تلگرام
+      </a>
+      <a class="btn btn-instagram rounded-pill px-3 py-3" href="https://instagram.com/USERNAME" target="_blank" rel="noopener">
+        اینستاگرام
+      </a>
+    </div>
+  </div>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/swiper-bundle.min.js"></script>
+  <script src="assets/js/sweetalert2.all.min.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      const progressLine = document.getElementById("progressLine");
+
+      function updateProgress() {
+        if (!progressLine) return;
+
+        const doc = document.documentElement;
+        const scrollTop = doc.scrollTop || document.body.scrollTop;
+        const scrollHeight = doc.scrollHeight - doc.clientHeight;
+        const progress = scrollHeight ? (scrollTop / scrollHeight) * 100 : 0;
+
+        progressLine.style.width = Math.min(100, Math.max(0, progress)) + "%";
+      }
+
+      updateProgress();
+      window.addEventListener("scroll", updateProgress, { passive: true });
+      window.addEventListener("resize", updateProgress);
+
+      if (window.bootstrap && bootstrap.ScrollSpy) {
+        const spy = bootstrap.ScrollSpy.getOrCreateInstance(document.body);
+        spy.refresh();
+      }
+
+      if (window.Swiper) {
+        new Swiper(".works-swiper", {
+          loop: true,
+          speed: 650,
+          grabCursor: true,
+          spaceBetween: 18,
+          slidesPerView: 1,
+          autoplay: {
+            delay: 3800,
+            disableOnInteraction: false
+          },
+          pagination: {
+            el: ".works-swiper .swiper-pagination",
+            clickable: true
+          },
+          navigation: {
+            nextEl: ".works-swiper .swiper-button-next",
+            prevEl: ".works-swiper .swiper-button-prev"
+          },
+          breakpoints: {
+            0: { slidesPerView: 1.04, spaceBetween: 12 },
+            576: { slidesPerView: 1.35, spaceBetween: 14 },
+            768: { slidesPerView: 2.05, spaceBetween: 16 },
+            1200: { slidesPerView: 3.05, spaceBetween: 18 },
+            1500: { slidesPerView: 3.45, spaceBetween: 20 }
+          }
+        });
+
+        new Swiper(".testimonials-swiper", {
+          loop: true,
+          speed: 650,
+          grabCursor: true,
+          spaceBetween: 16,
+          autoplay: {
+            delay: 4300,
+            disableOnInteraction: false
+          },
+          pagination: {
+            el: ".testimonials-swiper .swiper-pagination",
+            clickable: true
+          },
+          navigation: {
+            nextEl: ".testimonials-swiper .swiper-button-next",
+            prevEl: ".testimonials-swiper .swiper-button-prev"
+          },
+          breakpoints: {
+            0: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1200: { slidesPerView: 3 }
+          }
+        });
+      }
+
+      const revealItems = document.querySelectorAll(".reveal");
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.14 });
+
+        revealItems.forEach(function (item, index) {
+          item.style.transitionDelay = Math.min(index % 5, 4) * 70 + "ms";
+          observer.observe(item);
+        });
+      } else {
+        revealItems.forEach(function (item) {
+          item.classList.add("show");
+        });
+      }
+
+      const workModalEl = document.getElementById("workModal");
+      const workFrame = document.getElementById("workModalFrame");
+      const workImg = document.getElementById("workModalImg");
+      const workTitle = document.getElementById("workModalTitle");
+      const workSub = document.getElementById("workModalSub");
+      const zoomInBtn = document.getElementById("workZoomIn");
+      const zoomOutBtn = document.getElementById("workZoomOut");
+      const zoomResetBtn = document.getElementById("workZoomReset");
+
+      if (workModalEl && workFrame && workImg && window.bootstrap) {
+        const workModal = new bootstrap.Modal(workModalEl);
+        let zoom = 1;
+        let moveX = 0;
+        let moveY = 0;
+        let dragging = false;
+        let startX = 0;
+        let startY = 0;
+
+        function clamp(value, min, max) {
+          return Math.min(Math.max(value, min), max);
+        }
+
+        function applyZoom() {
+          if (zoom <= 1) {
+            moveX = 0;
+            moveY = 0;
+          }
+
+          workImg.style.transform = "translate3d(" + moveX + "px, " + moveY + "px, 0) scale(" + zoom + ")";
+        }
+
+        function resetZoom() {
+          zoom = 1;
+          moveX = 0;
+          moveY = 0;
+          applyZoom();
+        }
+
+        function changeZoom(amount) {
+          zoom = clamp(Number((zoom + amount).toFixed(2)), 1, 4);
+          applyZoom();
+        }
+
+        document.addEventListener("click", function (event) {
+          const card = event.target.closest(".work-card");
+          if (!card) return;
+
+          const imgSrc = card.dataset.img || card.querySelector("img")?.getAttribute("src");
+          if (!imgSrc) return;
+
+          resetZoom();
+          workImg.src = imgSrc;
+          workImg.alt = card.dataset.title || "نمونه‌کار";
+          workTitle.textContent = card.dataset.title || "نمایش نمونه‌کار";
+          workSub.textContent = card.dataset.sub || "";
+
+          workModal.show();
+        });
+
+        zoomInBtn?.addEventListener("click", function () { changeZoom(.35); });
+        zoomOutBtn?.addEventListener("click", function () { changeZoom(-.35); });
+        zoomResetBtn?.addEventListener("click", resetZoom);
+
+        workFrame.addEventListener("wheel", function (event) {
+          event.preventDefault();
+          changeZoom(event.deltaY < 0 ? .18 : -.18);
+        }, { passive: false });
+
+        workFrame.addEventListener("pointerdown", function (event) {
+          if (zoom <= 1) return;
+          dragging = true;
+          workFrame.classList.add("is-dragging");
+          startX = event.clientX - moveX;
+          startY = event.clientY - moveY;
+          workFrame.setPointerCapture(event.pointerId);
+        });
+
+        workFrame.addEventListener("pointermove", function (event) {
+          if (!dragging || zoom <= 1) return;
+          moveX = event.clientX - startX;
+          moveY = event.clientY - startY;
+          applyZoom();
+        });
+
+        function stopDragging(event) {
+          dragging = false;
+          workFrame.classList.remove("is-dragging");
+          if (event && workFrame.hasPointerCapture?.(event.pointerId)) {
+            workFrame.releasePointerCapture(event.pointerId);
+          }
+        }
+
+        workFrame.addEventListener("pointerup", stopDragging);
+        workFrame.addEventListener("pointercancel", stopDragging);
+        workFrame.addEventListener("pointerleave", stopDragging);
+
+        workImg.addEventListener("dblclick", function () {
+          zoom = zoom === 1 ? 2 : 1;
+          applyZoom();
+        });
+
+        workModalEl.addEventListener("hidden.bs.modal", function () {
+          workImg.src = "";
+          resetZoom();
+        });
+      }
+
+      const consultForm = document.getElementById("consultForm");
+      const consultModalEl = document.getElementById("consultModal");
+
+      function showMessage(type, title, text) {
+        if (window.Swal) {
+          Swal.fire({
+            icon: type,
+            title: title,
+            text: text,
+            confirmButtonText: "باشه"
+          });
+        } else {
+          alert(title + "\n" + text);
+        }
+      }
+
+      if (consultForm) {
+        consultForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          if (!consultForm.checkValidity()) {
+            event.stopPropagation();
+            consultForm.classList.add("was-validated");
+            return;
+          }
+
+          const submitBtn = consultForm.querySelector('button[type="submit"]');
+          const oldText = submitBtn.innerHTML;
+
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = "در حال ثبت...";
+
+          const formData = new FormData(consultForm);
+
+          fetch(consultForm.action, {
+            method: "POST",
+            body: formData
+          })
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (data) {
+              if (!data || !data.ok) {
+                showMessage("error", "خطا", data && data.message ? data.message : "لطفاً دوباره تلاش کنید.");
+                return;
+              }
+
+              showMessage("success", "ثبت شد ✅", "درخواست مشاوره شما با موفقیت ثبت شد.");
+
+              consultForm.reset();
+              consultForm.classList.remove("was-validated");
+
+              if (window.bootstrap && consultModalEl) {
+                const modalInstance = bootstrap.Modal.getInstance(consultModalEl) || new bootstrap.Modal(consultModalEl);
+                modalInstance.hide();
+              }
+            })
+            .catch(function () {
+              showMessage("error", "مشکل ارتباط با سرور", "دوباره تلاش کنید.");
+            })
+            .finally(function () {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = oldText;
+            });
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
