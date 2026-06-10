@@ -134,8 +134,8 @@ $email = setting($settings, 'email', '');
               <img src="<?= e($workImage) ?>" alt="<?= e($workTitle) ?>" loading="lazy">
             </button>
             <div class="work-info">
-              <h3><?= e($workTitle) ?></h3>
-              <p><?= e($workDesc) ?></p>
+              <h3 class="work-title"><?= e($workTitle) ?></h3>
+              <p class="work-desc"><?= e($workDesc) ?></p>
             </div>
           </article>
           <?php endforeach; ?>
@@ -348,9 +348,10 @@ $email = setting($settings, 'email', '');
 </footer>
 
 <div class="work-lightbox" id="workLightbox" aria-hidden="true" role="dialog" aria-label="نمایش بزرگ نمونه‌کار">
+  <div class="work-lightbox-backdrop" data-work-lightbox-close></div>
   <button class="work-lightbox-close" type="button" aria-label="بستن">×</button>
-  <div class="work-lightbox-inner" id="workLightboxInner">
-    <img id="workLightboxImg" class="work-lightbox-img" src="" alt="نمایش نمونه‌کار">
+  <div class="work-lightbox-stage" id="workLightboxStage">
+    <img id="workLightboxImg" class="work-lightbox-img" src="" alt="نمایش نمونه‌کار" draggable="false">
   </div>
 </div>
 
