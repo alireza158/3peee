@@ -1,0 +1,5 @@
+[
+  {"id":"sy-1","step_number":1,"title":"طراحی مسیر و وایرفریم با AI","description":"یاد می‌گیری نیاز کارفرما را به ساختار صفحه، وایرفریم و چیدمان تبدیل کنی.","tags":["پرامپت","وایرفریم","UX"],"icon":"🧭","sort_order":1,"is_active":true},
+  {"id":"sy-2","step_number":2,"title":"پیاده‌سازی رابط کاربری","description":"با PHP خام، Bootstrap RTL و JavaScript صفحات تمیز و ریسپانسیو می‌سازی.","tags":["Bootstrap","RTL","JavaScript"],"icon":"💻","sort_order":2,"is_active":true},
+  {"id":"sy-3","step_number":3,"title":"دیباگ، انتشار و نمونه‌کار","description":"پروژه را تست، بهینه و برای ارائه به مشتری یا رزومه آماده می‌کنی.","tags":["Debug","Deploy","Portfolio"],"icon":"🚀","sort_order":3,"is_active":true}
+]

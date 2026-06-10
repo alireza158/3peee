@@ -1,0 +1,5 @@
+[
+  {"id":"work-1","title":"صفحه تک محصول","subtitle":"طراحی صفحه محصول با ساختار فروشگاهی و ریسپانسیو","description":"نمایش کامل تصویر بدون برش، مناسب بررسی جزئیات طراحی.","image":"assets/works/work-1.jpg","label":"نمونه ۱","sort_order":1,"is_active":true,"created_at":"2026-06-01 09:00:00"},
+  {"id":"work-2","title":"لندینگ دوره آموزشی","subtitle":"صفحه فرود برای معرفی دوره و دریافت لید","description":"نمایش ریسپانسیو و واضح برای صفحه فرود آموزشی.","image":"assets/works/work-2.jpg","label":"نمونه ۲","sort_order":2,"is_active":true,"created_at":"2026-06-01 09:10:00"},
+  {"id":"work-3","title":"سایت فروشگاهی","subtitle":"صفحه محصولات، معرفی کالا و ساختار خرید ساده","description":"کارت محصولات، مسیر خرید و جزئیات UI با نمایش کامل.","image":"assets/works/work-3.jpg","label":"نمونه ۳","sort_order":3,"is_active":true,"created_at":"2026-06-01 09:20:00"}
+]

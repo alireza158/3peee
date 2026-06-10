@@ -1,0 +1,5 @@
+[
+  {"id":"gift-1","title":"پک پرامپت آماده","description":"مجموعه پرامپت‌های کاربردی برای طراحی، کدنویسی و تولید محتوا.","icon":"🎁","sort_order":1,"is_active":true},
+  {"id":"gift-2","title":"چک‌لیست تحویل پروژه","description":"چک‌لیست کامل برای تست و تحویل سایت به کارفرما.","icon":"✅","sort_order":2,"is_active":true},
+  {"id":"gift-3","title":"قالب قرارداد ساده","description":"نمونه قرارداد قابل ویرایش برای شروع همکاری با مشتری.","icon":"📄","sort_order":3,"is_active":true}
+]

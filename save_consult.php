@@ -1,69 +1,55 @@
 <?php
-// save_consult.php
+require_once __DIR__ . '/includes/functions.php';
 header('Content-Type: application/json; charset=utf-8');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-  http_response_code(405);
-  echo json_encode(['ok' => false, 'message' => 'Method not allowed']);
-  exit;
+    http_response_code(405);
+    echo json_encode(['ok' => false, 'message' => 'Method not allowed'], JSON_UNESCAPED_UNICODE);
+    exit;
 }
 
-// دریافت داده‌ها
-$fullName = trim($_POST['fullName'] ?? '');
-$phone    = trim($_POST['phone'] ?? '');
-$level    = trim($_POST['level'] ?? '');
-$note     = trim($_POST['note'] ?? '');
+$name = trim((string)($_POST['fullName'] ?? $_POST['name'] ?? ''));
+$mobile = trim((string)($_POST['phone'] ?? $_POST['mobile'] ?? ''));
+$level = trim((string)($_POST['level'] ?? ''));
+$message = trim((string)($_POST['message'] ?? $_POST['note'] ?? ''));
 
-// اعتبارسنجی
-if ($fullName === '' || mb_strlen($fullName) < 3) {
-  http_response_code(422);
-  echo json_encode(['ok' => false, 'message' => 'نام معتبر وارد کنید.']);
-  exit;
+if ($name === '' || mb_strlen($name) < 3 || mb_strlen($name) > 120) {
+    http_response_code(422);
+    echo json_encode(['ok' => false, 'message' => 'نام معتبر وارد کنید.'], JSON_UNESCAPED_UNICODE);
+    exit;
 }
 
-if (!preg_match('/^(\+98|0)?9\d{9}$/', $phone)) {
-  http_response_code(422);
-  echo json_encode(['ok' => false, 'message' => 'شماره تماس معتبر نیست.']);
-  exit;
+if (!preg_match('/^(\+98|0)?9\d{9}$/', $mobile)) {
+    http_response_code(422);
+    echo json_encode(['ok' => false, 'message' => 'شماره تماس معتبر نیست.'], JSON_UNESCAPED_UNICODE);
+    exit;
 }
 
-$allowedLevels = ['', 'beginner', 'intermediate', 'advanced'];
-if (!in_array($level, $allowedLevels, true)) {
-  $level = '';
+$levelLabels = [
+    '' => '',
+    'beginner' => 'کاملاً مبتدی',
+    'basic' => 'آشنایی اولیه با طراحی سایت',
+    'intermediate' => 'در حال اجرای پروژه',
+    'advanced' => 'طراح سایت و دنبال رشد درآمد',
+];
+$level = $levelLabels[$level] ?? mb_substr($level, 0, 80);
+
+$leads = read_json('leads.json', []);
+if (!is_array($leads)) { $leads = []; }
+$leads[] = [
+    'id' => make_id(),
+    'name' => $name,
+    'mobile' => $mobile,
+    'level' => $level,
+    'message' => mb_substr($message, 0, 1000),
+    'status' => 'جدید',
+    'created_at' => now_string(),
+];
+
+if (!write_json('leads.json', $leads)) {
+    http_response_code(500);
+    echo json_encode(['ok' => false, 'message' => 'خطا در ذخیره اطلاعات.'], JSON_UNESCAPED_UNICODE);
+    exit;
 }
 
-// مسیر CSV
-$dir = __DIR__ . '/data';
-if (!is_dir($dir)) {
-  mkdir($dir, 0755, true);
-}
-
-$file = $dir . '/consults.csv';
-$isNew = !file_exists($file);
-
-$date = date('Y-m-d H:i:s');
-$ip   = $_SERVER['REMOTE_ADDR'] ?? '';
-$ua   = $_SERVER['HTTP_USER_AGENT'] ?? '';
-
-// ردیف
-$row = [$date, $fullName, $phone, $level, $note, $ip, $ua];
-
-// ذخیره با قفل
-$fp = fopen($file, 'a');
-if (!$fp) {
-  http_response_code(500);
-  echo json_encode(['ok' => false, 'message' => 'خطا در باز کردن فایل.']);
-  exit;
-}
-
-flock($fp, LOCK_EX);
-
-if ($isNew) {
-  fputcsv($fp, ['date', 'fullName', 'phone', 'level', 'note', 'ip', 'userAgent']);
-}
-fputcsv($fp, $row);
-
-flock($fp, LOCK_UN);
-fclose($fp);
-
-echo json_encode(['ok' => true, 'message' => 'ثبت شد']);
+echo json_encode(['ok' => true, 'message' => 'درخواست مشاوره با موفقیت ثبت شد.'], JSON_UNESCAPED_UNICODE);
