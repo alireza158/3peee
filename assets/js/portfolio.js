@@ -273,3 +273,39 @@
     return Math.min(max, Math.max(min, value));
   }
 })();
+
+(function () {
+  'use strict';
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var popup = document.getElementById('aiCoursePopup');
+    if (!popup) return;
+
+    var closeBtn = popup.querySelector('.ai-course-popup-close');
+    var showTimer = null;
+
+    function openPopup() {
+      popup.classList.add('is-visible');
+      popup.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('ai-course-popup-open');
+      if (closeBtn) closeBtn.focus({ preventScroll: true });
+    }
+
+    function closePopup() {
+      popup.classList.remove('is-visible');
+      popup.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('ai-course-popup-open');
+      if (showTimer) window.clearTimeout(showTimer);
+    }
+
+    showTimer = window.setTimeout(openPopup, 1500);
+
+    if (closeBtn) closeBtn.addEventListener('click', closePopup);
+    popup.addEventListener('click', function (event) {
+      if (event.target === popup) closePopup();
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && popup.classList.contains('is-visible')) closePopup();
+    });
+  });
+})();
