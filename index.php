@@ -403,6 +403,17 @@ $email = setting($settings, 'email', '');
   </div>
 </div>
 
+<div class="free-course-popup-overlay" id="freeCoursePopup" aria-hidden="true">
+  <div class="free-course-popup-box" role="dialog" aria-modal="true" aria-labelledby="freeCoursePopupTitle" aria-describedby="freeCoursePopupDesc">
+    <button class="free-course-popup-close" type="button" aria-label="بستن پاپ‌آپ دوره رایگان">×</button>
+    <div class="free-course-popup-badge">ثبت‌نام کاملاً رایگان است</div>
+    <div class="free-course-popup-icon" aria-hidden="true">🤖</div>
+    <h2 class="free-course-popup-title" id="freeCoursePopupTitle">دوره رایگان طراحی سایت با هوش مصنوعی</h2>
+    <p class="free-course-popup-desc" id="freeCoursePopupDesc">یاد بگیر چطور بدون کدنویسی سنگین، با کمک هوش مصنوعی یک سایت واقعی طراحی کنی و مسیر ورود به بازار طراحی سایت را سریع‌تر شروع کنی.</p>
+    <a class="free-course-popup-btn" href="https://3pe.ir/register.php">ثبت‌نام رایگان در دوره</a>
+  </div>
+</div>
+
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/swiper-bundle.min.js"></script>
 <script src="assets/js/sweetalert2.all.min.js"></script>
