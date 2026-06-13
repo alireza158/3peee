@@ -9,5 +9,11 @@
   "email": "info@3pe.ir",
   "logo": "assets/logo.png",
   "hero_image": "assets/images/ai-hero.png",
-  "footer_text": "© 3pe | دوره طراحی سایت با هوش مصنوعی"
+  "footer_text": "© 3pe | دوره طراحی سایت با هوش مصنوعی",
+  "registration_success_title": "ثبت‌نامت با موفقیت انجام شد 🎉",
+  "registration_success_description": "برای دریافت آموزش رایگان روی دکمه زیر کلیک کن.",
+  "registration_success_button_text": "دریافت آموزش رایگان",
+  "registration_success_redirect_url": "#",
+  "registration_auto_redirect_enabled": false,
+  "registration_auto_redirect_seconds": 3
 }
