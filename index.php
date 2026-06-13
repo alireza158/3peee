@@ -403,14 +403,24 @@ $email = setting($settings, 'email', '');
   </div>
 </div>
 
-<div class="free-course-popup-overlay" id="freeCoursePopup" aria-hidden="true">
-  <div class="free-course-popup-box" role="dialog" aria-modal="true" aria-labelledby="freeCoursePopupTitle" aria-describedby="freeCoursePopupDesc">
-    <button class="free-course-popup-close" type="button" aria-label="بستن پاپ‌آپ دوره رایگان">×</button>
-    <div class="free-course-popup-badge">ثبت‌نام کاملاً رایگان است</div>
-    <div class="free-course-popup-icon" aria-hidden="true">🤖</div>
-    <h2 class="free-course-popup-title" id="freeCoursePopupTitle">دوره رایگان طراحی سایت با هوش مصنوعی</h2>
-    <p class="free-course-popup-desc" id="freeCoursePopupDesc">یاد بگیر چطور بدون کدنویسی سنگین، با کمک هوش مصنوعی یک سایت واقعی طراحی کنی و مسیر ورود به بازار طراحی سایت را سریع‌تر شروع کنی.</p>
-    <a class="free-course-popup-btn" href="https://3pe.ir/register.php">ثبت‌نام رایگان در دوره</a>
+<div class="ai-course-popup-overlay" id="aiCoursePopup" aria-hidden="true">
+  <div class="ai-course-popup" role="dialog" aria-modal="true" aria-labelledby="aiCoursePopupTitle" aria-describedby="aiCoursePopupText">
+    <div class="ai-course-popup-card">
+      <button class="ai-course-popup-close" type="button" aria-label="بستن پاپ‌آپ دوره رایگان">×</button>
+      <div class="ai-course-popup-shine" aria-hidden="true"></div>
+      <div class="ai-course-popup-badge">فرصت رایگان برای شروع طراحی سایت</div>
+      <div class="ai-course-popup-icon" aria-hidden="true">🚀</div>
+      <h2 class="ai-course-popup-title" id="aiCoursePopupTitle">دوره رایگان طراحی سایت با هوش مصنوعی</h2>
+      <p class="ai-course-popup-text" id="aiCoursePopupText">یاد بگیر چطور با کمک هوش مصنوعی، بدون کدنویسی سنگین، سایت واقعی طراحی کنی و سریع‌تر وارد بازار کار طراحی سایت بشی.</p>
+      <div class="ai-course-popup-features" aria-label="مزیت‌های دوره">
+        <span>مناسب شروع از صفر</span>
+        <span>آموزش پروژه‌محور</span>
+        <span>کاملاً رایگان</span>
+      </div>
+      <p class="ai-course-popup-urgency">ظرفیت ثبت‌نام رایگان محدوده</p>
+      <a class="ai-course-popup-button" href="https://3pe.ir/register.php">ثبت‌نام رایگان دوره</a>
+      <p class="ai-course-popup-note">بعد از کلیک وارد فرم ثبت‌نام پرس‌لاین می‌شوی.</p>
+    </div>
   </div>
 </div>
 

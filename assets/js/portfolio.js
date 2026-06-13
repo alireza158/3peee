@@ -278,44 +278,27 @@
   'use strict';
 
   document.addEventListener('DOMContentLoaded', function () {
-    var popup = document.getElementById('freeCoursePopup');
+    var popup = document.getElementById('aiCoursePopup');
     if (!popup) return;
 
-    var sessionKey = 'freeCoursePopupShown';
-    var closeBtn = popup.querySelector('.free-course-popup-close');
-    var ctaBtn = popup.querySelector('.free-course-popup-btn');
+    var closeBtn = popup.querySelector('.ai-course-popup-close');
     var showTimer = null;
 
-    try {
-      if (window.sessionStorage.getItem(sessionKey) === '1') return;
-    } catch (error) {
-      // Continue without storage if the browser blocks sessionStorage.
-    }
-
-    function markShown() {
-      try {
-        window.sessionStorage.setItem(sessionKey, '1');
-      } catch (error) {
-        // Ignore storage failures; the popup should still be usable.
-      }
-    }
-
     function openPopup() {
-      markShown();
       popup.classList.add('is-visible');
       popup.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('free-course-popup-open');
+      document.body.classList.add('ai-course-popup-open');
       if (closeBtn) closeBtn.focus({ preventScroll: true });
     }
 
     function closePopup() {
       popup.classList.remove('is-visible');
       popup.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('free-course-popup-open');
+      document.body.classList.remove('ai-course-popup-open');
       if (showTimer) window.clearTimeout(showTimer);
     }
 
-    showTimer = window.setTimeout(openPopup, 2500);
+    showTimer = window.setTimeout(openPopup, 1500);
 
     if (closeBtn) closeBtn.addEventListener('click', closePopup);
     popup.addEventListener('click', function (event) {
@@ -324,6 +307,5 @@
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && popup.classList.contains('is-visible')) closePopup();
     });
-    if (ctaBtn) ctaBtn.addEventListener('click', markShown);
   });
 })();
