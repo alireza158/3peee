@@ -11,6 +11,24 @@ $aiUsageOptions = ['بله، زیاد', 'بله، گاهی', 'فقط اسمش ر
 $learningTypes = ['حضوری', 'آنلاین زنده', 'ویدیوهای ضبط‌شده', 'ترکیبی', 'فرقی ندارد'];
 $contactOptions = ['تماس تلفنی', 'پیامک', 'واتساپ', 'تلگرام', 'دایرکت اینستاگرام'];
 
+$settings = read_json('settings.json', []);
+if (!is_array($settings)) {
+    $settings = [];
+}
+function registration_setting(array $settings, string $key, string $default): string
+{
+    $value = trim((string)($settings[$key] ?? ''));
+    return $value !== '' ? $value : $default;
+}
+$registrationSuccess = [
+    'title' => registration_setting($settings, 'registration_success_title', 'ثبت‌نامت با موفقیت انجام شد 🎉'),
+    'description' => registration_setting($settings, 'registration_success_description', 'برای دریافت آموزش رایگان روی دکمه زیر کلیک کن.'),
+    'button_text' => registration_setting($settings, 'registration_success_button_text', 'دریافت آموزش رایگان'),
+    'redirect_url' => registration_setting($settings, 'registration_success_redirect_url', '#'),
+    'auto_redirect_enabled' => !empty($settings['registration_auto_redirect_enabled']),
+    'auto_redirect_seconds' => max(1, (int)($settings['registration_auto_redirect_seconds'] ?? 3)),
+];
+
 $errors = [];
 $success = false;
 $storageError = null;
@@ -95,12 +113,11 @@ function checked_card(string $name, string $value, $current): string
     <link href="assets/css/bootstrap.rtl.min.css" rel="stylesheet">
     <style>
         @font-face{font-family:Vazirmatn;src:url('assets/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
-        :root{--primary:#5b21b6;--primary2:#7c3aed;--secondary:#0284c7;--dark:#0f172a;--muted:#64748b;--line:rgba(226,232,240,.92)}
-        *{box-sizing:border-box} body{margin:0;font-family:Vazirmatn,Tahoma,sans-serif;color:#0f172a;min-height:100vh;background:radial-gradient(circle at top right,rgba(99,102,241,.18),transparent 32%),radial-gradient(circle at bottom left,rgba(14,165,233,.16),transparent 30%),linear-gradient(180deg,#f8fafc,#eef2ff)}
-        a{text-decoration:none}.page-wrapper{width:100%;max-width:1020px;margin:0 auto;padding:42px 16px}.form-shell{overflow:hidden;border-radius:32px;background:rgba(255,255,255,.95);border:1px solid var(--line);box-shadow:0 28px 90px rgba(15,23,42,.12);backdrop-filter:blur(16px)}
-        .form-header{position:relative;overflow:hidden;color:#fff;padding:46px 38px;background:radial-gradient(circle at 12% 18%,rgba(56,189,248,.36),transparent 28%),radial-gradient(circle at 88% 12%,rgba(168,85,247,.36),transparent 30%),linear-gradient(135deg,#020617 0%,#111827 38%,#1e1b4b 72%,#312e81 100%)}
-        .form-header:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.88),transparent)}.header-content{position:relative;z-index:2}.header-top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:28px}.brand{display:flex;align-items:center;gap:12px}.brand-icon{width:52px;height:52px;border-radius:20px;display:grid;place-items:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);font-size:24px}.brand-name{font-weight:950;font-size:21px}.brand-subtitle{color:#bfdbfe;font-size:13px}.header-tag{display:inline-flex;align-items:center;gap:8px;padding:10px 15px;border-radius:999px;font-size:13px;color:#e0f2fe;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);white-space:nowrap}.header-title{max-width:800px;font-size:clamp(1.75rem,4vw,2.45rem);line-height:1.75;font-weight:950;margin:0 0 12px}.header-title span{color:#93c5fd}.header-desc{max-width:760px;margin:0;color:#dbeafe;font-size:15px;line-height:2.1}.header-features{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.feature-pill{padding:9px 13px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.15);font-size:13px;font-weight:800}
-        .form-body{padding:30px}.question-card{position:relative;margin-bottom:22px;padding:24px;border-radius:26px;background:#fff;border:1px solid var(--line);box-shadow:0 16px 42px rgba(15,23,42,.06);animation:rise .45s ease both}.question-card:nth-child(2){animation-delay:.04s}.question-card:nth-child(3){animation-delay:.08s}.question-card:nth-child(4){animation-delay:.12s}@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}.section-badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;padding:8px 12px;border-radius:999px;background:rgba(91,33,182,.09);color:var(--primary);font-weight:900;font-size:13px}.question-title{font-size:1.18rem;font-weight:950;margin-bottom:18px}.form-control,.form-select{border-radius:16px;border-color:rgba(15,23,42,.12);padding:.85rem 1rem}.form-control:focus,.form-select:focus{border-color:rgba(91,33,182,.45);box-shadow:0 0 0 .25rem rgba(91,33,182,.10)}.option-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.option-card{display:block;height:100%;cursor:pointer}.option-card input{position:absolute;opacity:0;pointer-events:none}.option-content{height:100%;border:1px solid rgba(15,23,42,.10);border-radius:18px;padding:14px 15px;background:#f8fafc;color:#1e293b;font-weight:850;transition:.2s ease;display:flex;align-items:center;gap:10px}.option-content:before{content:"";width:18px;height:18px;border-radius:50%;border:2px solid #cbd5e1;background:#fff;flex:0 0 18px}.option-card input[type="checkbox"] + .option-content:before{border-radius:6px}.option-card input:checked + .option-content{border-color:rgba(91,33,182,.72);background:linear-gradient(135deg,rgba(91,33,182,.12),rgba(2,132,199,.10));box-shadow:0 12px 26px rgba(91,33,182,.10)}.option-card input:checked + .option-content:before{background:linear-gradient(135deg,var(--primary),var(--secondary));border-color:transparent;box-shadow:inset 0 0 0 4px #fff}.submit-box{padding:24px;border-radius:26px;background:linear-gradient(135deg,rgba(91,33,182,.10),rgba(2,132,199,.10));border:1px solid rgba(91,33,182,.13)}.btn-brand{border:0;color:#fff!important;background:linear-gradient(90deg,var(--primary),var(--secondary));box-shadow:0 18px 36px rgba(91,33,182,.22);font-weight:950}.alert{border-radius:20px}.small-note{color:var(--muted);line-height:2}@media(max-width:767px){.page-wrapper{padding:20px 10px}.form-header{padding:32px 20px}.header-top{align-items:flex-start;flex-direction:column}.form-body{padding:18px}.question-card{padding:18px;border-radius:22px}.option-grid{grid-template-columns:1fr}}
+        :root{--primary:#4f46e5;--primary2:#7c3aed;--secondary:#0ea5e9;--success:#16a34a;--dark:#0f172a;--muted:#64748b;--line:rgba(226,232,240,.92);--danger:#dc2626}
+        *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Vazirmatn,Tahoma,sans-serif;font-size:14px;color:var(--dark);min-height:100vh;background:radial-gradient(circle at 82% 8%,rgba(124,58,237,.22),transparent 28%),radial-gradient(circle at 10% 72%,rgba(14,165,233,.18),transparent 30%),linear-gradient(145deg,#f8fafc 0%,#eef2ff 48%,#ecfeff 100%);overflow-x:hidden}body:before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(15,23,42,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.035) 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.7),transparent);pointer-events:none}a{text-decoration:none}.page-wrapper{position:relative;width:100%;max-width:1040px;margin:0 auto;padding:36px 14px}.form-shell{overflow:hidden;border-radius:30px;background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.75);box-shadow:0 28px 80px rgba(15,23,42,.14);backdrop-filter:blur(18px);animation:shellIn .55s ease both}@keyframes shellIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+        .form-header{position:relative;overflow:hidden;color:#fff;padding:38px 34px;background:radial-gradient(circle at 14% 18%,rgba(56,189,248,.34),transparent 25%),radial-gradient(circle at 86% 10%,rgba(168,85,247,.36),transparent 28%),linear-gradient(135deg,#020617 0%,#111827 44%,#1e1b4b 76%,#312e81 100%)}.form-header:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.9),transparent)}.form-header:after{content:"";position:absolute;width:280px;height:280px;border-radius:999px;left:-110px;top:-120px;background:linear-gradient(135deg,rgba(14,165,233,.30),rgba(124,58,237,.18));filter:blur(6px)}.header-content{position:relative;z-index:2}.header-top{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:11px}.brand-icon{width:48px;height:48px;border-radius:18px;display:grid;place-items:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.20);font-size:22px;box-shadow:inset 0 1px 0 rgba(255,255,255,.24)}.brand-name{font-weight:950;font-size:19px}.brand-subtitle{color:#bfdbfe;font-size:12px}.header-tag{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;font-size:12px;color:#e0f2fe;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);white-space:nowrap}.header-title{max-width:820px;font-size:clamp(1.55rem,3.3vw,2.25rem);line-height:1.8;font-weight:950;margin:0 0 10px;letter-spacing:-.4px}.header-title span{color:#93c5fd}.header-desc{max-width:760px;margin:0;color:#dbeafe;font-size:14px;line-height:2}.header-features{display:flex;flex-wrap:wrap;gap:9px;margin-top:21px}.feature-pill{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border-radius:999px;background:rgba(15,23,42,.34);border:1px solid rgba(255,255,255,.14);font-size:12px;font-weight:850;color:#e0f2fe}.feature-pill:before{content:"✓";display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:rgba(125,211,252,.18);color:#7dd3fc}
+        .form-body{padding:26px}.alert{border-radius:20px}.success-card{position:relative;overflow:hidden;text-align:center;padding:30px;border-radius:26px;background:radial-gradient(circle at top,rgba(34,197,94,.12),transparent 36%),linear-gradient(180deg,#fff,#f8fafc);border:1px solid #dcfce7;box-shadow:0 18px 48px rgba(15,23,42,.08);animation:popIn .45s ease both}.success-icon{width:70px;height:70px;margin:0 auto 14px;border-radius:24px;display:grid;place-items:center;color:var(--success);background:#dcfce7;font-size:32px;box-shadow:0 14px 30px rgba(22,163,74,.18)}.success-card h2{font-size:clamp(1.25rem,3vw,1.7rem);font-weight:950;line-height:1.8}.success-card p{color:#475569;line-height:2}.success-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:13px 24px;border-radius:17px;color:#fff!important;font-weight:950;background:linear-gradient(135deg,var(--success),var(--secondary));box-shadow:0 16px 36px rgba(14,165,233,.24);transition:.22s ease}.success-btn:hover{transform:translateY(-2px);box-shadow:0 22px 44px rgba(14,165,233,.32)}.redirect-countdown{font-size:12px;color:var(--muted);margin-top:12px}
+        .question-card{position:relative;margin-bottom:18px;padding:21px;border-radius:24px;background:rgba(255,255,255,.94);border:1px solid var(--line);box-shadow:0 14px 36px rgba(15,23,42,.055);animation:rise .5s ease both;transition:.22s ease}.question-card:hover{transform:translateY(-2px);border-color:rgba(79,70,229,.25);box-shadow:0 20px 46px rgba(15,23,42,.08)}.question-card:nth-child(2){animation-delay:.04s}.question-card:nth-child(3){animation-delay:.08s}.question-card:nth-child(4){animation-delay:.12s}@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}@keyframes popIn{from{opacity:0;transform:scale(.96) translateY(12px)}to{opacity:1;transform:none}}.section-badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;padding:7px 11px;border-radius:999px;background:rgba(79,70,229,.09);color:var(--primary);font-weight:900;font-size:12px}.question-title{font-size:1.04rem;font-weight:950;margin-bottom:15px}.form-label{font-size:13px;color:#334155}.form-control,.form-select{border-radius:15px;border:1px solid rgba(15,23,42,.12);padding:.75rem .9rem;font-size:13.5px;background:#f8fafc;transition:.2s ease}.form-control:focus,.form-select:focus{background:#fff;border-color:rgba(79,70,229,.55);box-shadow:0 0 0 .22rem rgba(79,70,229,.11)}textarea.form-control{line-height:1.9}.option-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.option-card{display:block;height:100%;cursor:pointer}.option-card input{position:absolute;opacity:0;pointer-events:none}.option-content{height:100%;min-height:48px;border:1px solid rgba(15,23,42,.10);border-radius:16px;padding:12px 13px;background:#f8fafc;color:#1e293b;font-weight:800;font-size:13px;transition:.2s ease;display:flex;align-items:center;gap:9px}.option-content:before{content:"";width:17px;height:17px;border-radius:50%;border:2px solid #cbd5e1;background:#fff;flex:0 0 17px;transition:.2s ease}.option-card:hover .option-content{border-color:#a5b4fc;background:#f1f5ff;color:#3730a3}.option-card input[type="checkbox"] + .option-content:before{border-radius:6px}.option-card input:checked + .option-content{border-color:rgba(79,70,229,.72);background:linear-gradient(135deg,rgba(79,70,229,.12),rgba(14,165,233,.10));box-shadow:0 12px 24px rgba(79,70,229,.10);color:#312e81}.option-card input:checked + .option-content:before{background:linear-gradient(135deg,var(--primary),var(--secondary));border-color:transparent;box-shadow:inset 0 0 0 4px #fff}.submit-box{padding:22px;border-radius:24px;background:linear-gradient(135deg,rgba(79,70,229,.10),rgba(14,165,233,.10));border:1px solid rgba(79,70,229,.13)}.btn-brand{border:0;color:#fff!important;background:linear-gradient(90deg,var(--primary),var(--secondary));box-shadow:0 18px 36px rgba(79,70,229,.22);font-weight:950;transition:.22s ease}.btn-brand:hover{transform:translateY(-2px);box-shadow:0 24px 48px rgba(79,70,229,.30)}.btn-brand:active{transform:translateY(0) scale(.99)}.small-note{color:var(--muted);line-height:2;font-size:12.5px}@media(max-width:767px){body{font-size:13.5px}.page-wrapper{padding:16px 9px}.form-shell{border-radius:24px}.form-header{padding:28px 18px}.header-top{align-items:flex-start;flex-direction:column}.header-tag{width:100%;justify-content:center}.form-body{padding:16px 12px}.question-card{padding:16px;border-radius:20px;margin-bottom:14px}.option-grid{grid-template-columns:1fr}.option-content{min-height:48px}.submit-box{padding:18px}.btn-brand,.success-btn{width:100%;min-height:52px}.success-card{padding:24px 16px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
     </style>
 </head>
 <body>
@@ -113,19 +130,22 @@ function checked_card(string $name, string $value, $current): string
                         <span class="brand-icon">🚀</span>
                         <span><span class="brand-name d-block">3pe.ir</span><span class="brand-subtitle">دوره طراحی سایت با هوش مصنوعی</span></span>
                     </a>
-                    <span class="header-tag">✨ ثبت نام رایگان دوره آموزشی</span>
+                    <span class="header-tag">✨ دسترسی رایگان بعد از ثبت‌نام</span>
                 </div>
-                <h1 class="header-title">فرم ثبت نام رایگان <span>دوره طراحی سایت با هوش مصنوعی</span></h1>
-                <p class="header-desc">با پاسخ دادن به چند سؤال کوتاه، سطح فعلی شما و مسیر مناسب آموزشی مشخص می‌شود.</p>
-                <div class="header-features"><span class="feature-pill">بدون هزینه</span><span class="feature-pill">مشاوره رایگان</span><span class="feature-pill">مسیر اختصاصی یادگیری</span></div>
+                <h1 class="header-title">ثبت‌نام دوره رایگان <span>طراحی سایت با هوش مصنوعی</span></h1>
+                <p class="header-desc">اطلاعاتت رو وارد کن تا دسترسی به آموزش رایگان برات فعال بشه و مسیر طراحی سایت با هوش مصنوعی رو از همین امروز شروع کنی.</p>
+                <div class="header-features"><span class="feature-pill">کاملاً رایگان</span><span class="feature-pill">مناسب شروع از صفر</span><span class="feature-pill">آموزش کاربردی و پروژه‌محور</span></div>
             </div>
         </header>
 
         <main class="form-body">
             <?php if ($success): ?>
-                <div class="alert alert-success border-0 shadow-sm p-4 mb-4">
-                    <h2 class="h5 fw-black mb-2">ثبت‌نام اولیه شما با موفقیت انجام شد ✅</h2>
-                    <p class="mb-0">اطلاعات شما با موفقیت ثبت شد. مشاور دوره به‌زودی با شما تماس می‌گیرد.</p>
+                <div class="success-card mb-4" id="registrationSuccess" data-auto-redirect="<?= $registrationSuccess['auto_redirect_enabled'] ? '1' : '0' ?>" data-redirect-url="<?= e($registrationSuccess['redirect_url']) ?>" data-redirect-seconds="<?= e($registrationSuccess['auto_redirect_seconds']) ?>">
+                    <div class="success-icon" aria-hidden="true">✓</div>
+                    <h2 class="mb-2"><?= e($registrationSuccess['title']) ?></h2>
+                    <p class="mb-3"><?= e($registrationSuccess['description']) ?></p>
+                    <a class="success-btn" href="<?= e($registrationSuccess['redirect_url']) ?>"><?= e($registrationSuccess['button_text']) ?> ↗</a>
+                    <div class="redirect-countdown" id="redirectCountdown" hidden></div>
                 </div>
             <?php endif; ?>
             <?php if ($errors): ?>
@@ -137,6 +157,7 @@ function checked_card(string $name, string $value, $current): string
                 </div>
             <?php endif; ?>
 
+            <?php if (!$success): ?>
             <form method="post" action="register.php" novalidate>
                 <?= csrf_field() ?>
                 <section class="question-card">
@@ -174,12 +195,36 @@ function checked_card(string $name, string $value, $current): string
                 </section>
 
                 <div class="submit-box text-center">
-                    <button class="btn btn-brand btn-lg rounded-pill px-5 py-3" type="submit">ثبت اطلاعات و دریافت مشاوره رایگان</button>
-                    <p class="small-note mb-0 mt-3">اطلاعات شما فقط برای پیگیری ثبت‌نام دوره استفاده می‌شود.</p>
+                    <button class="btn btn-brand btn-lg rounded-pill px-5 py-3" type="submit">ثبت و دریافت دوره رایگان</button>
+                    <p class="small-note mb-0 mt-3">اطلاعات شما با امنیت در پنل ادمین ثبت می‌شود و فقط برای فعال‌سازی دسترسی آموزش رایگان استفاده خواهد شد.</p>
                 </div>
             </form>
+            <?php endif; ?>
         </main>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const success = document.getElementById('registrationSuccess');
+        if (!success) return;
+        const autoRedirect = success.dataset.autoRedirect === '1';
+        const redirectUrl = success.dataset.redirectUrl || '#';
+        let secondsLeft = Number(success.dataset.redirectSeconds || 3);
+        const countdown = document.getElementById('redirectCountdown');
+        if (autoRedirect && redirectUrl !== '#') {
+            countdown.hidden = false;
+            countdown.textContent = 'انتقال خودکار تا ' + secondsLeft + ' ثانیه دیگر انجام می‌شود.';
+            const timer = setInterval(function () {
+                secondsLeft -= 1;
+                countdown.textContent = 'انتقال خودکار تا ' + secondsLeft + ' ثانیه دیگر انجام می‌شود.';
+                if (secondsLeft <= 0) {
+                    clearInterval(timer);
+                    window.location.href = redirectUrl;
+                }
+            }, 1000);
+        }
+    });
+</script>
 </body>
 </html>

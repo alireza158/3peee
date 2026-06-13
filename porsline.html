@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>فرم اطلاعات اولیه دوره طراحی سایت با هوش مصنوعی</title>
+  <title>ثبت‌نام دوره رایگان طراحی سایت با هوش مصنوعی</title>
 
   <!-- Bootstrap RTL -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
@@ -14,13 +14,13 @@
 
   <style>
     @font-face {
-      font-family: "Vazir";
+      font-family: "Vazirmatn";
       src: url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-Regular.woff2") format("woff2");
       font-weight: 400;
     }
 
     @font-face {
-      font-family: "Vazir";
+      font-family: "Vazirmatn";
       src: url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-Bold.woff2") format("woff2");
       font-weight: 700;
     }
@@ -31,20 +31,20 @@
 
     body {
       margin: 0;
-      font-family: "Vazir", sans-serif;
+      font-family: "Vazirmatn", Tahoma, sans-serif;
       background:
         radial-gradient(circle at top right, rgba(99, 102, 241, 0.18), transparent 32%),
         radial-gradient(circle at bottom left, rgba(14, 165, 233, 0.16), transparent 30%),
-        linear-gradient(180deg, #f8fafc, #eef2ff);
+        linear-gradient(145deg, #f8fafc 0%, #eef2ff 48%, #ecfeff 100%);
       color: #0f172a;
       min-height: 100vh;
     }
 
     .page-wrapper {
       width: 100%;
-      max-width: 980px;
+      max-width: 1040px;
       margin: 0 auto;
-      padding: 42px 16px;
+      padding: 52px 16px;
     }
 
     .form-shell {
@@ -156,7 +156,7 @@
 
     .header-title {
       max-width: 760px;
-      font-size: 34px;
+      font-size: clamp(25px, 4vw, 40px);
       line-height: 1.75;
       font-weight: 900;
       margin: 0 0 14px;
@@ -410,6 +410,106 @@
       line-height: 1.9;
     }
 
+
+
+    .form-control.is-invalid,
+    .form-select.is-invalid,
+    .option-grid.is-invalid {
+      border-color: #f87171;
+      box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.12);
+    }
+
+    .option-grid.is-invalid {
+      padding: 10px;
+      border: 1px solid #fecaca;
+      border-radius: 20px;
+      background: #fff7f7;
+    }
+
+    .field-error {
+      margin-top: 8px;
+      color: #dc2626;
+      font-size: 12.5px;
+      line-height: 1.8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .success-panel {
+      display: none;
+      padding: 38px 28px;
+      margin: 34px;
+      text-align: center;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at top, rgba(34, 197, 94, 0.12), transparent 36%),
+        linear-gradient(180deg, #ffffff, #f8fafc);
+      border: 1px solid #dcfce7;
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+    }
+
+    .success-panel.show { display: block; }
+
+    .success-icon {
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 18px;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #16a34a;
+      background: #dcfce7;
+      font-size: 34px;
+      box-shadow: 0 14px 30px rgba(22, 163, 74, 0.18);
+    }
+
+    .success-title {
+      margin: 0 0 10px;
+      color: #0f172a;
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 900;
+      line-height: 1.7;
+    }
+
+    .success-description {
+      margin: 0 auto 22px;
+      max-width: 560px;
+      color: #475569;
+      font-size: 15px;
+      line-height: 2;
+    }
+
+    .success-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 54px;
+      padding: 14px 24px;
+      border-radius: 18px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 900;
+      background: linear-gradient(135deg, #16a34a, #0ea5e9);
+      box-shadow: 0 16px 36px rgba(14, 165, 233, 0.24);
+      transition: all 0.22s ease;
+    }
+
+    .success-btn:hover {
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 22px 44px rgba(14, 165, 233, 0.32);
+    }
+
+    .redirect-countdown {
+      margin-top: 14px;
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
     /* Mobile */
     @media (max-width: 768px) {
       .page-wrapper {
@@ -463,6 +563,11 @@
 
       .form-body {
         padding: 20px 14px 24px;
+      }
+
+      .success-panel {
+        margin: 20px 14px 24px;
+        padding: 30px 16px;
       }
 
       .section-card {
@@ -547,33 +652,33 @@
 
             <div class="header-tag">
               <i class="bi bi-lightning-charge-fill"></i>
-              شروع مسیر حرفه‌ای طراحی سایت
+              دسترسی رایگان بعد از ثبت‌نام
             </div>
           </div>
 
           <h1 class="header-title">
-            فرم اطلاعات اولیه برای ورود به دوره
+            ثبت‌نام دوره رایگان
             <span>طراحی سایت با هوش مصنوعی</span>
           </h1>
 
           <p class="header-desc">
-            با پاسخ دادن به چند سؤال کوتاه، سطح فعلی شما، هدف یادگیری و بهترین مسیر آموزشی مناسب شما مشخص می‌شود.
+            اطلاعاتت رو وارد کن تا دسترسی به آموزش رایگان برات فعال بشه و مسیر طراحی سایت با هوش مصنوعی رو از همین امروز شروع کنی.
           </p>
 
           <div class="header-features">
             <div class="header-feature">
               <i class="bi bi-code-slash"></i>
-              مناسب افراد مبتدی
+              کاملاً رایگان
             </div>
 
             <div class="header-feature">
               <i class="bi bi-robot"></i>
-              همراه با ChatGPT
+              مناسب شروع از صفر
             </div>
 
             <div class="header-feature">
               <i class="bi bi-window-stack"></i>
-              پروژه‌محور
+              آموزش کاربردی و پروژه‌محور
             </div>
           </div>
 
@@ -581,7 +686,7 @@
       </header>
 
       <!-- Form -->
-      <form class="form-body">
+      <form class="form-body" id="freeCourseForm" novalidate>
 
         <!-- Section 1 -->
         <section class="section-card">
@@ -599,22 +704,22 @@
           <div class="row g-3">
             <div class="col-md-6">
               <label class="form-label">نام و نام خانوادگی شما چیست؟</label>
-              <input type="text" class="form-control" placeholder="مثلاً: علی رضایی">
+              <input type="text" class="form-control" name="full_name" placeholder="مثلاً: علی رضایی" autocomplete="name" required>
             </div>
 
             <div class="col-md-6">
               <label class="form-label">شماره موبایل شما چیست؟</label>
-              <input type="tel" class="form-control" placeholder="مثلاً: 09123456789">
+              <input type="tel" class="form-control" name="mobile" placeholder="مثلاً: 09123456789" inputmode="tel" autocomplete="tel" pattern="^09\d{9}$" required>
             </div>
 
             <div class="col-md-6">
               <label class="form-label">شهر محل سکونت شما کجاست؟</label>
-              <input type="text" class="form-control" placeholder="مثلاً: تهران">
+              <input type="text" class="form-control" name="city" placeholder="مثلاً: تهران" autocomplete="address-level2" required>
             </div>
 
             <div class="col-md-6">
               <label class="form-label">سن شما چقدر است؟</label>
-              <select class="form-select">
+              <select class="form-select" name="age" required>
                 <option selected disabled>انتخاب کنید</option>
                 <option>زیر ۱۵ سال</option>
                 <option>۱۵ تا ۱۸ سال</option>
@@ -907,23 +1012,58 @@
 
         <div class="submit-area">
           <button type="submit" class="submit-btn">
-            ارسال اطلاعات
+            ثبت و دریافت دوره رایگان
             <i class="bi bi-arrow-left-short"></i>
           </button>
 
           <p class="form-note">
-            اطلاعات شما فقط برای بررسی سطح اولیه و راهنمایی بهتر درباره دوره استفاده می‌شود.
+            با ثبت فرم، مسیر دریافت آموزش رایگان برای شما فعال می‌شود. اطلاعات شما محرمانه می‌ماند و فقط برای راهنمایی بهتر استفاده خواهد شد.
           </p>
         </div>
 
       </form>
 
+      <section class="success-panel" id="successPanel" aria-live="polite">
+        <div class="success-icon" aria-hidden="true">
+          <i class="bi bi-check2-circle"></i>
+        </div>
+        <h2 class="success-title" id="successTitle">ثبت‌نامت با موفقیت انجام شد 🎉</h2>
+        <p class="success-description" id="successDescription">برای دریافت آموزش رایگان روی دکمه زیر کلیک کن.</p>
+        <a class="success-btn" id="successButton" href="#">
+          دریافت آموزش رایگان
+          <i class="bi bi-box-arrow-up-left"></i>
+        </a>
+        <p class="redirect-countdown" id="redirectCountdown" hidden></p>
+      </section>
+
+
     </div>
   </main>
 
   <script>
+    const freeCourseFormSettings = {
+      successTitle: 'ثبت‌نامت با موفقیت انجام شد 🎉',
+      successDescription: 'برای دریافت آموزش رایگان روی دکمه زیر کلیک کن.',
+      successButtonText: 'دریافت آموزش رایگان',
+      successRedirectUrl: '#',
+      autoRedirectEnabled: false,
+      autoRedirectSeconds: 3
+    };
+
     document.addEventListener("DOMContentLoaded", function () {
       const sections = document.querySelectorAll(".section-card");
+      const form = document.getElementById("freeCourseForm");
+      const successPanel = document.getElementById("successPanel");
+      const successTitle = document.getElementById("successTitle");
+      const successDescription = document.getElementById("successDescription");
+      const successButton = document.getElementById("successButton");
+      const redirectCountdown = document.getElementById("redirectCountdown");
+
+      function showSections() {
+        sections.forEach(function (section) {
+          section.classList.add("show");
+        });
+      }
 
       if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver(function (entries) {
@@ -933,19 +1073,89 @@
               observer.unobserve(entry.target);
             }
           });
-        }, {
-          threshold: 0.15
-        });
+        }, { threshold: 0.15 });
 
         sections.forEach(function (section, index) {
           section.style.transitionDelay = (index * 90) + "ms";
           observer.observe(section);
         });
       } else {
-        sections.forEach(function (section) {
-          section.classList.add("show");
-        });
+        showSections();
       }
+
+      function removeError(element) {
+        element.classList.remove("is-invalid");
+        const container = element.closest(".col-md-6, .question-block, div");
+        const error = container ? container.querySelector(".field-error") : null;
+        if (error) error.remove();
+      }
+
+      function addError(element, message) {
+        element.classList.add("is-invalid");
+        const container = element.closest(".col-md-6, .question-block, div");
+        if (!container || container.querySelector(".field-error")) return;
+        const error = document.createElement("div");
+        error.className = "field-error";
+        error.innerHTML = '<i class="bi bi-exclamation-circle"></i>' + message;
+        container.appendChild(error);
+      }
+
+      function validateForm() {
+        let isValid = true;
+        form.querySelectorAll(".field-error").forEach(function (error) { error.remove(); });
+        form.querySelectorAll(".is-invalid").forEach(function (field) { field.classList.remove("is-invalid"); });
+
+        form.querySelectorAll("input[required], select[required]").forEach(function (field) {
+          if (!field.value.trim()) {
+            isValid = false;
+            addError(field, "لطفاً این قسمت را کامل کنید.");
+          } else if (field.name === "mobile" && !/^09\d{9}$/.test(field.value.trim())) {
+            isValid = false;
+            addError(field, "شماره موبایل را با فرمت 09123456789 وارد کنید.");
+          }
+        });
+
+        return isValid;
+      }
+
+      form.addEventListener("input", function (event) {
+        if (event.target.matches("input, select")) removeError(event.target);
+      });
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        if (!validateForm()) {
+          const firstError = form.querySelector(".is-invalid");
+          if (firstError) firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+          return;
+        }
+
+        successTitle.textContent = freeCourseFormSettings.successTitle;
+        successDescription.textContent = freeCourseFormSettings.successDescription;
+        successButton.textContent = freeCourseFormSettings.successButtonText;
+        successButton.insertAdjacentHTML("beforeend", ' <i class="bi bi-box-arrow-up-left"></i>');
+        successButton.href = freeCourseFormSettings.successRedirectUrl || "#";
+
+        form.hidden = true;
+        successPanel.classList.add("show");
+        successPanel.scrollIntoView({ behavior: "smooth", block: "center" });
+
+        if (freeCourseFormSettings.autoRedirectEnabled && freeCourseFormSettings.successRedirectUrl && freeCourseFormSettings.successRedirectUrl !== "#") {
+          let secondsLeft = Number(freeCourseFormSettings.autoRedirectSeconds) || 3;
+          redirectCountdown.hidden = false;
+          redirectCountdown.textContent = "انتقال خودکار تا " + secondsLeft + " ثانیه دیگر انجام می‌شود.";
+
+          const timer = setInterval(function () {
+            secondsLeft -= 1;
+            redirectCountdown.textContent = "انتقال خودکار تا " + secondsLeft + " ثانیه دیگر انجام می‌شود.";
+            if (secondsLeft <= 0) {
+              clearInterval(timer);
+              window.location.href = freeCourseFormSettings.successRedirectUrl;
+            }
+          }, 1000);
+        }
+      });
     });
   </script>
 
